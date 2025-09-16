@@ -1,10 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+
+.titulo-inicial{
+  text-align: center;
+  color: #5a20c0;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+.bem-vindo{
+  color: #5a20c0;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px 15px 15px 20px;
+}
+
+.paragrafo{
+  color: gray;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  padding: 10px 15px 15px 20px;
+  font-size: 19px;
+
+
+}
+
+.sombra-img{
+  filter: drop-shadow(0 0 0.75rem #5a20c0);
+}
+
 .card-inicial {
   width: 250px;
   height: auto;
   background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow: 3px 3px 25px rgba(0,0,0,0.3);
   border-radius: 15px;
   justify-content: center;
   align-items: center;
@@ -28,106 +57,104 @@
   align-self: center;
 }
 
-.container-principal {
-  padding: 15px;
-}
 
-
-.borda-inferior {
-  border-bottom: 1px solid #dee2e6;
-}
-
-.container-metricas {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-bottom: 25px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.cartao-metrica {
-  padding: 20px;
-  border-radius: 8px;
-  color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  min-height: 110px;
+.main{
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  width: 100%;
+  margin-top: 60px;
 }
 
-.azul {
-  background: linear-gradient(135deg, #348ddb 0%, #0f6ec4 100%);
-}
-
-.vermelho {
-  background: linear-gradient(135deg, #fd2020 0%, #d32f2f 100%);
-}
-
-.verde {
-  background: linear-gradient(135deg, #29b62b 0%, #28a745 100%);
-}
-
-.cartao-metrica h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-.cartao-metrica span {
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-/* Container de Gráficos */
-.container-graficos {
-  padding: 20px;
-  background: #f0f0f0;
-  border-radius: 10px;
-  font-family: 'Poppins', sans-serif;
-}
-
-.graficos-superiores {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 25px;
-}
-
-.cartao-grafico {
-  background: white;
-  border-radius: 8px;
-  padding: 25px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-}
-
-.cabecalho-grafico h3 {
-  color: #2c3e50;
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-}
-
-.linha-divisoria {
-  border-bottom: 2px solid #eee;
-  margin-bottom: 15px;
+.full-boxer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
-.grafico-inferior {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+.box-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
+.comment-box:hover{
+  margin-top: 12px;
+}
 
-  .container-metricas,
-  .graficos-superiores {
-    grid-template-columns: 1fr;
-  }
+.comment-box{
+  width: 500px;
+  background: white;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 3px 3px 25px rgba(0,0,0,0.3);
+}
 
-  .cartao-metrica span {
-    font-size: 1.5rem;
-  }
+.Profile{
+  display: flex;
+  align-items: center;
+}
+
+.profile-image{
+  width: 70px;
+  height: 70px;
+  box-shadow: 2px 2px 30px rgba(0,0,0,0.3);
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.Name{
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.Name strong{
+  color: black;
+  font-size: 18px;
+}
+
+.Name span{
+  color: gray;
+  margin-top: 2px;
+}
+
+.comment p{
+  color: black;
+}
+
+/* fim */
+
+.custom-shape-divider-top-1758030568 {
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-top-1758030568 svg {
+  display: block;
+  width: calc(126% + 1.3px);
+  height: 174px;
+  transform: rotateY(180deg);
+}
+
+.custom-shape-divider-top-1758030568 .shape-fill {
+  fill: #5a20c0;
 }

@@ -16,7 +16,7 @@ function MainHistoria() {
                         <button type="button" class="btn btn-warning btn-sm ">Ler mais</button>
                         </div>
                     </div>
-                    <div className="col-md-6 "></div>
+                    <div className="col-md-6 "> </div>
                 </div>
 
                 <div className="row mt-3">

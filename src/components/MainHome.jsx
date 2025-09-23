@@ -107,7 +107,7 @@ function MainHome() {
               </p>
             </div>
             <div className="col-md-5 ">
-              <img src={Crianca} className=' sombra-img align-items-center justify-content-center' alt="" srcset="" />
+              <img src={Crianca} className=' sombra-img align-items-center justify-content-center mt-5' alt="" srcset="" />
             </div>
           </div>
         </div>

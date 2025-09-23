@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
+.row {
+  justify-content: center; 
+}
+
+.col {
+  display: flex;
+  justify-content: center;
+}
+
 .card-teste {
   display: flex;
   justify-content: center;
@@ -116,6 +125,7 @@
 
 
 .main {
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -222,7 +232,6 @@
 .custom-shape-divider-top-1758030568 .shape-fill {
   fill: #5a20c0;
 }
-
 
 /* form */
 .contact-form-container {

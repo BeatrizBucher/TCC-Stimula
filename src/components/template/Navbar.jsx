@@ -23,8 +23,8 @@ function Navbar() {
           <Link to="/games" className="nav-item me-1 nav-link d-inline-flex text-decoration-none rounded text-white nav-estilo">Games</Link>
           <Link to="/historia" className="nav-item me-1 nav-link d-inline-flex text-decoration-none rounded text-white nav-estilo">Histórias</Link>
           <Link to="/quadro" className="nav-item me-1 nav-link d-inline-flex text-decoration-none rounded text-white nav-estilo">Quadro</Link>
-          <Link to="*" className="nav-item me-1 nav-link d-inline-flex text-decoration-none rounded text-white nav-estilo">Tarefas</Link>
-          <Link to="*" className="nav-item me-4 nav-link d-inline-flex text-decoration-none rounded text-white nav-estilo">Demandas</Link>
+          <Link to="/tarefas" className="nav-item me-1 nav-link d-inline-flex text-decoration-none rounded text-white nav-estilo">Tarefas</Link>
+          <Link to="/demandas" className="nav-item me-4 nav-link d-inline-flex text-decoration-none rounded text-white nav-estilo">Demandas</Link>
          </ul>
          <ul class="navbar-nav">
           <Link to="/" className="nav-item me-5 nav-link d-inline-flex text-decoration-none rounded text-white nav-entrar">Entrar</Link>   

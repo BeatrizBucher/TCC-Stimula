@@ -42,12 +42,11 @@ function MainLogin() {
     }
 
     return (
-        <div className="container-fluid-2">
-            <div className="form-container">
+        <div className="container justify-content-center align-items-center d-flex vh-100">
+            <div className="form- bg-light p-5 rounded shadow">
                 <form className="form" onSubmit={handleLogin}>
                     {erroMensagem && <p className="error-message">{erroMensagem}</p>}
-                    <h1 className="title">Login</h1>
-                    <p className="subtitle">Insira suas credenciais para acessar sua conta</p>
+                    <h1 className="title">LOGIN</h1>
 
                     <div className="input-group">
                         <label>Email</label>
@@ -55,7 +54,7 @@ function MainLogin() {
                             type="email" 
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Digite seu email"
+                            placeholder="email"
                         />
                     </div>
 
@@ -65,17 +64,14 @@ function MainLogin() {
                             type="password" 
                             value={senha}
                             onChange={(e) => setSenha(e.target.value)}
-                            placeholder="Digite sua senha"
+                            placeholder="senha"
                         />
                     </div>
 
-                    <button className="button">Login</button>
+                    <button className="button">Entrar</button>
                     
-                    {/* <p className="register-link">Não tem uma conta? <Link to="/cadastro">Cadastrar</Link></p> */}
-                    <p className="register-link">Esqueceu sua senha? <Link to="/resetarsenha">Resetar</Link></p>
                 </form>
             </div>
-            <div className="image-container"></div>
         </div>
     );
 }

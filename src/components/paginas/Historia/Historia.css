@@ -3,7 +3,7 @@
     color: #fef600;
 }
 
-.card {
+.card-1 {
     padding: 10px 15px 15px 20px;
     height: auto;
     box-shadow: inset 0 0 1em gold;
@@ -57,3 +57,11 @@
     box-shadow: inset 0 0 1em #009be2;
     border-radius:  15px;
 }
+
+.img-historia {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+

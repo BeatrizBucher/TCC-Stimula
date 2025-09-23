@@ -1,10 +1,9 @@
-import './Home.css'
-import MainHome from '../../MainHome';
+import './Games.css'
+import MainJogoDaMemoria from '../../MainJogoDaMemoria';
 import Navbar from '../../template/Navbar';
 import React from "react";
 
-
-function Home() {
+function JogoDaMemoria() {
 
   
     return (
@@ -14,7 +13,7 @@ function Home() {
             <div className="container-fluid">
                 <div className="row">
                   
-                    <MainHome />
+                    <MainJogoDaMemoria />
 
 
                 </div>
@@ -22,4 +21,4 @@ function Home() {
         </ >
     );
 }
-export default Home;
+export default JogoDaMemoria;

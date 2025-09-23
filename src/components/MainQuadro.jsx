@@ -1,185 +1,165 @@
 import './paginas/Quadro/Quadro.css';
 import React, { useState, useEffect } from "react";
 
-function MainHome() {
-  // Estados do Kanban com persistência
-  const [columns, setColumns] = useState(() => {
-    const savedColumns = localStorage.getItem('stimula-kanban');
-    return savedColumns ? JSON.parse(savedColumns) : {
-      todo: {
-        id: 'todo',
-        title: 'A Fazer',
-        items: [
-          { id: 1, content: 'Montar quebra-cabeça' },
-          { id: 2, content: 'Associar formas' }
+function Quadro() {
+   const [colunas, setColunas] = useState(() => {
+    const colunasSalvas = localStorage.getItem('stimula-kanban');
+    return colunasSalvas ? JSON.parse(colunasSalvas) : {
+      afazer: {
+        id: 'afazer',
+        titulo: 'A Fazer',
+        itens: [
+          { id: 1, conteudo: 'Montar quebra-cabeça' },
+          { id: 2, conteudo: 'Associar formas' }
         ]
       },
-      progress: {
-        id: 'progress',
-        title: 'Fazendo',
-        items: [
-          { id: 3, content: 'Jogo da memória' }
+      fazendo: {
+        id: 'fazendo',
+        titulo: 'Fazendo',
+        itens: [
+          { id: 3, conteudo: 'Jogo da memória' }
         ]
       },
-      done: {
-        id: 'done',
-        title: 'Feito!',
-        items: [
-          { id: 4, content: 'Identificar cores' }
+      feito: {
+        id: 'feito',
+        titulo: 'Feito!',
+        itens: [
+          { id: 4, conteudo: 'Identificar cores' }
         ]
       }
     };
   });
 
-  const [draggedItem, setDraggedItem] = useState(null);
-  const [newTask, setNewTask] = useState('');
+  const [itemArrastado, setItemArrastado] = useState(null);
+  const [novaTarefa, setNovaTarefa] = useState('');
 
-  // Persistir estado no localStorage
   useEffect(() => {
-    localStorage.setItem('stimula-kanban', JSON.stringify(columns));
-  }, [columns]);
+    localStorage.setItem('stimula-kanban', JSON.stringify(colunas));
+  }, [colunas]);
 
-  // Função para adicionar nova tarefa
-  const addTask = () => {
-    if (!newTask.trim()) return;
+  const adicionarTarefa = () => {
+    if (!novaTarefa.trim()) return;
     
-    const newItem = {
+    const novoItem = {
       id: Date.now(),
-      content: newTask
+      conteudo: novaTarefa
     };
 
-    setColumns(prev => ({
+    setColunas(prev => ({
       ...prev,
-      todo: {
-        ...prev.todo,
-        items: [...prev.todo.items, newItem]
+      afazer: {
+        ...prev.afazer,
+        itens: [...prev.afazer.itens, novoItem]
       }
     }));
     
-    setNewTask('');
+    setNovaTarefa('');
   };
 
-  // Função para remover card
-  const handleDeleteCard = (itemId, columnId) => {
-    setColumns(prev => {
-      const newColumns = { ...prev };
-      newColumns[columnId].items = newColumns[columnId].items.filter(
+  const excluirCard = (itemId, colunaId) => {
+    setColunas(prev => {
+      const novasColunas = { ...prev };
+      novasColunas[colunaId].itens = novasColunas[colunaId].itens.filter(
         item => item.id !== itemId
       );
-      return newColumns;
+      return novasColunas;
     });
   };
 
-  // Função para iniciar o arrasto
-  const handleDragStart = (e, itemId, sourceColumn) => {
-    setDraggedItem({ itemId, sourceColumn });
+  const iniciarArrasto = (e, itemId, colunaOrigem) => {
+    setItemArrastado({ itemId, colunaOrigem });
     e.dataTransfer.effectAllowed = 'move';
   };
 
-  // Função para soltar o item
-  const handleDrop = (e, targetColumn) => {
+  const soltarItem = (e, colunaDestino) => {
     e.preventDefault();
     
-    if (!draggedItem || draggedItem.sourceColumn === targetColumn) return;
+    if (!itemArrastado || itemArrastado.colunaOrigem === colunaDestino) return;
     
-    setColumns(prev => {
-      const newColumns = { ...prev };
-      const sourceCol = newColumns[draggedItem.sourceColumn];
-      const targetCol = newColumns[targetColumn];
+    setColunas(prev => {
+      const novasColunas = { ...prev };
+      const colunaOrigem = novasColunas[itemArrastado.colunaOrigem];
+      const colunaDest = novasColunas[colunaDestino];
       
-      const itemIndex = sourceCol.items.findIndex(
-        item => item.id === draggedItem.itemId
+      const indiceItem = colunaOrigem.itens.findIndex(
+        item => item.id === itemArrastado.itemId
       );
       
-      if (itemIndex === -1) return prev;
+      if (indiceItem === -1) return prev;
       
-      const [movedItem] = sourceCol.items.splice(itemIndex, 1);
-      targetCol.items.push(movedItem);
+      const [itemMovido] = colunaOrigem.itens.splice(indiceItem, 1);
+      colunaDest.itens.push(itemMovido);
       
-      return newColumns;
+      return novasColunas;
     });
     
-    setDraggedItem(null);
+    setItemArrastado(null);
   };
 
-  const handleDragOver = e => {
+  const permitirSoltar = e => {
     e.preventDefault();
   };
 
   return (
-    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 className="h2">Meu Quadro de Atividades</h1>
-      </div>
+    <main className="col-md-9 ms-sm-auto col-lg-12 px-md-4">
 
-      <div className="kanban-container">
-        {/* Formulário para adicionar novas tarefas */}
-        <div className="task-form mb-4">
-          <div className="input-group">
+      <div className="container-kanban mt-5">
+
+        <div className="formulario-tarefa">
+          <div className="grupo-input">
             <input
               type="text"
-              className="form-control"
+              className="campo-texto"
               placeholder="Adicione uma nova atividade..."
-              value={newTask}
-              onChange={e => setNewTask(e.target.value)}
-              onKeyPress={e => e.key === 'Enter' && addTask()}
+              value={novaTarefa}
+              onChange={e => setNovaTarefa(e.target.value)}
+              onKeyPress={e => e.key === 'Enter' && adicionarTarefa()}
             />
             <button 
-              className="btn" 
-              onClick={addTask}
-              style={{ 
-                backgroundColor: '#4ECDC4', 
-                color: 'white',
-                fontWeight: 'bold'
-              }}
+              className="botao-adicionar" 
+              onClick={adicionarTarefa}
             >
               Adicionar
             </button>
           </div>
         </div>
 
-        {/* Quadro Kanban */}
-        <div className="kanban-board">
-          {Object.keys(columns).map(columnId => {
-            const column = columns[columnId];
+        <div className="quadro-kanban">
+          {Object.keys(colunas).map(colunaId => {
+            const coluna = colunas[colunaId];
             return (
               <div 
-                key={column.id}
-                className="kanban-column"
-                onDrop={e => handleDrop(e, columnId)}
-                onDragOver={handleDragOver}
+                key={coluna.id}
+                className="coluna"
+                onDrop={e => soltarItem(e, colunaId)}
+                onDragOver={permitirSoltar}
               >
-                <div className="column-header">
+                <div className="cabecalho-coluna">
                   <h3>
-                    {columnId === 'todo' && '📋 '}
-                    {columnId === 'progress' && '✏️ '}
-                    {columnId === 'done' && '✅ '}
-                    {column.title}
+                    {colunaId === 'afazer' && '📋 '}
+                    {colunaId === 'fazendo' && '✏️ '}
+                    {colunaId === 'feito' && '✅ '}
+                    {coluna.titulo}
                   </h3>
-                  <span className="badge">{column.items.length}</span>
+                  <span className="contador">{coluna.itens.length}</span>
                 </div>
-                <div className="kanban-cards">
-                  {column.items.map(item => (
+                <div className="cards">
+                  {coluna.itens.map(item => (
                     <div
                       key={item.id}
-                      className="kanban-card"
+                      className="card"
                       draggable
-                      onDragStart={e => handleDragStart(e, item.id, columnId)}
+                      onDragStart={e => iniciarArrasto(e, item.id, colunaId)}
                     >
-                      {item.content}
-                      {/* Ícone de lixeira discreto */}
-                      <button 
-                        className="delete-btn"
-                        onClick={() => handleDeleteCard(item.id, columnId)}
-                        aria-label="Remover atividade"
-                      >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3 6H5H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M10 11V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M14 11V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </button>
+                      {item.conteudo}
+                      <i 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          excluirCard(item.id, colunaId);
+                        }} 
+                        className="bi bi-trash-fill icone-excluir"
+                        title="Remover atividade"
+                      ></i>
                     </div>
                   ))}
                 </div>
@@ -192,4 +172,4 @@ function MainHome() {
   );
 }
 
-export default MainHome;
+export default Quadro;

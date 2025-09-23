@@ -1,18 +1,24 @@
-import './contrato.css'
+import './Games.css'
+import MainGames from '../../MainGames';
 import Navbar from '../../template/Navbar';
-import MainCadastroContrato from '../../MainCadastroContrato'
+import React from "react";
 
-function CadastrarContrato() {
+function Games() {
+
+  
     return (
         <>
             <Navbar />
+
             <div className="container-fluid">
                 <div className="row">
-                    <MainCadastroContrato />
+                  
+                    <MainGames />
+
 
                 </div>
             </div>
         </ >
     );
 }
-export default CadastrarContrato;
+export default Games;

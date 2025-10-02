@@ -19,6 +19,28 @@ import Usuario3 from "../img/3.png"
 import Usuario4 from "../img/4.png"
 
 function MainHome() {
+
+  // cadastro() ={
+
+  //   const dados = {
+  //     nome,
+  //     email, 
+  //     observacao
+  //   }
+
+  //   try{
+  //     const response = await axios.post("http://localhost:3001/cadastrarMensagem", dados)
+
+  //     if(response.status === 201){
+
+  //     }
+  //   }
+  //   catch(erro){
+
+
+  //   }
+
+  // }
   return (
     <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid">
 
@@ -31,7 +53,7 @@ function MainHome() {
       </div>
 
 
-      <div className="row justify-content-between mt-3 d-flex ">
+      <div className="row mt-3 d-flex ">
 
         {/* topicos */}
         <div>

@@ -26,11 +26,7 @@ const ControllerContrato = {
 
             const { cliente_id, terapeuta_id, atividade_id} = req.body;
 
-            console.log(req.body)
-
-         
-
-            if (!terapeuta_id || !atividade_id) {
+            if (!terapeuta_id || !atividade_id || !cliente_id) {
                 return res.status(400).json({ msg: "Dados inválidos" });
             }
 
@@ -47,8 +43,10 @@ const ControllerContrato = {
     },
 
     listarTodasDemandas: async (req, res) => {
+        const {id} = req.params;
+
         try {
-            const resultado = await demandaController.buscarTodasDemandas();
+            const resultado = await demandaController.buscarTodasDemandas(id);
             res.status(200).json(resultado);
         } catch (error) {
             res.status(500).json({ mensagem: error.message });

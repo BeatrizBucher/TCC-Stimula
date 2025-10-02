@@ -1,7 +1,8 @@
 const express = require('express');
 const usuarioController = require('../controller/controller');
-const clienteController = require('../controller/clienteController')
-const demandaController = require('../controller/demandaController')
+const clienteController = require('../controller/clienteController');
+const demandaController = require('../controller/demandaController');
+const contatoController = require('../controller/contatoController');
 const routers = express.Router();
 
 // login
@@ -21,10 +22,13 @@ routers.get('/listarClientePorId/:id', clienteController.getClientePorId);
 // demanda
 routers.get('/listarporid/:id', demandaController.BuscarClientePorId); //ok
 routers.post('/cadastroDemanda', demandaController.criarDemanda); //ok
-routers.get('/listarDemanda', demandaController.listarTodasDemandas);
+routers.get('/listarDemanda/:id', demandaController.listarTodasDemandas);
 routers.delete('/deletarDemanda/:id', demandaController.deletarId);
 routers.put('/atualizarDemanda/:id', demandaController.atualizarDemandaId);
 routers.get('/listarDemandaPorId/:id', demandaController.getDemandaPorId);
+
+//contato
+routers.post('/cadastrarMensagem', contatoController.criarNovaMensagem);
 
 
 module.exports = routers;

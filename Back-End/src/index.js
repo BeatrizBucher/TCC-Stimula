@@ -7,8 +7,8 @@ require('dotenv').config();
 
 const app = express(); // api utilize o express
 
-app.use(express.json()); //use o modo json
-app.use(cors());//necessario para habilitar comunicação com servidor 
+app.use(express.json()); // use o modo json
+app.use(cors());// necessario para habilitar comunicação com servidor 
 app.use('/api', vereficarToken)
 app.use(routers); //utilize as totas
 

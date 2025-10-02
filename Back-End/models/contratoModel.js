@@ -13,9 +13,7 @@ const Contrato = {
     },
 
     postcriarDemanda: async (cliente_id, terapeuta_id, atividade_id) => {
-
         try {
-
             const result = await executeQuery(
                 `INSERT INTO demanda 
                 (cliente_id, terapeuta_id, atividade_id) 
@@ -28,16 +26,21 @@ const Contrato = {
         }
     },
 
-    buscarTodasDemandas: async () => {
+    buscarTodasDemandas: async (id) => {
+
+        console.log(id);
         return await executeQuery(`
-           SELECT 
-            CONCAT(cliente.nome_completo AS Nome, atividade.nome AS Atividade, terapeuta.nome AS Terapeuta, 
-            demanda.id AS DemandaID
-        FROM demanda
-        JOIN cliente ON cliente.id = demanda.cliente_id
-        JOIN atividade ON atividade.id = demanda.atividade_id
-        JOIN terapeuta ON servico.id = demanda.terapeuta_id
-        `);
+           SELECT  
+            cliente.nome_completo as Nome, 
+            atividade.nome as Atividade, 
+            terapeuta.nome as Terapeuta, 
+            demanda.id as DemandaID
+            FROM demanda
+            JOIN cliente ON cliente.id = demanda.cliente_id
+                JOIN atividade ON atividade.id = demanda.atividade_id
+                    JOIN terapeuta ON terapeuta.id = demanda.terapeuta_id
+            WHERE cliente.id = ?
+        `,[id]);
     },
 
 

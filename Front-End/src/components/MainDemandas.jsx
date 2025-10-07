@@ -5,6 +5,7 @@ import { useState } from "react";
 function MainDemanda() {
     const [paciente, setPaciente] = useState("");
     const [atividade, setAtividade] = useState("");
+    const [terapeuta, setTerapeuta] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,12 +14,12 @@ function MainDemanda() {
     return (
         <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid d-flex flex-column align-items-center">
 
-            <div className="container mt-5">
+            <div className="container mt-3">
                 <h2 className="titulo-principal">
-                    Cadastro de atividade
+                    Cadastro de demanda
                 </h2>
                 <div className="caixa-cadastro mx-auto">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} >
                      
                         <div className="mb-3">
                             <label className="form-label texto-label">Paciente:</label>
@@ -45,6 +46,19 @@ function MainDemanda() {
                                 <option value="Jogo da Memória">Jogo da Memória</option>
                                 <option value="Quiz de Palavras">Quiz de Palavras</option>
                                 <option value="Kanban Interativo">Kanban Interativo</option>
+                            </select>
+                        </div>
+
+                        <div className="mb-3">
+                            <label className="form-label texto-label">Terapeuta:</label>
+                            <select
+                                className="form-select campo-input"
+                                value={terapeuta}
+                                onChange={(e) => setPaciente(e.target.value)}
+                            >
+                                <option value="">Selecione o terapeuta</option>
+                                <option value="João">João</option>
+                                <option value="Maria">Maria</option>
                             </select>
                         </div>
 

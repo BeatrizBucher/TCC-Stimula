@@ -7,7 +7,7 @@
 
 
 import './paginas/home/Home.css';
-import React from "react";
+import { useState } from "react";
 import Book from "../img/book.png"
 import ABC from "../img/abc.png"
 import Numero from "../img/numero.png"
@@ -20,27 +20,39 @@ import Usuario4 from "../img/4.png"
 
 function MainHome() {
 
-  // cadastro() ={
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [observacao, setObservacao] = useState('');
 
-  //   const dados = {
-  //     nome,
-  //     email, 
-  //     observacao
-  //   }
+  async function enviarMensagem(event) {
+    event.preventDefault();
 
-  //   try{
-  //     const response = await axios.post("http://localhost:3001/cadastrarMensagem", dados)
+    let contato = {
+      nome: nome,
+      email: email,
+      observacao: observacao
+    }
 
-  //     if(response.status === 201){
+    contato = JSON.stringify(contato);
+    console.log(contato)
+    try {
+      let cadastro = await fetch('http://localhost:3001/cadastrarMensagem', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: contato
+      })
 
-  //     }
-  //   }
-  //   catch(erro){
+      if (cadastro.status === 201) {
+        console.log('sucesso');
+      }
 
+    } catch (erro) {
+      console.log('erro');
+    }
+  }
 
-  //   }
-
-  // }
   return (
     <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid">
 
@@ -211,7 +223,7 @@ function MainHome() {
             </div>
             <div class="comment">
               <p>
-              Eu gosto de jogar no Stimula! As histórias são legais e os joguinhos me deixam feliz. Quero sempre brincar e aprender mais!
+                Eu gosto de jogar no Stimula! As histórias são legais e os joguinhos me deixam feliz. Quero sempre brincar e aprender mais!
               </p>
             </div>
           </div>
@@ -248,19 +260,24 @@ function MainHome() {
             <p>
               Sua comunicação é importante. Preencha os campos e nossa equipe responderá em breve.
             </p>
-            <form action="#">
-              <div class="input-box">
-                <input type="text" placeholder="Nome" />
+            <form onSubmit={enviarMensagem}>
+              <div class="input-box mb-5">
+              <label htmlFor="nome" className="form-label">Nome:</label>
+                <input value={nome} onChange={(e) => setNome(e.target.value)}
+                  type="text" placeholder="Nome" id="nome" required />
               </div>
-              <div class="input-box">
-                <input type="text" placeholder="Email" />
+              <div class="input-box mb-5">
+              <label htmlFor="nome" className="form-label">Email:</label>
+                <input value={email} onChange={(e) => setEmail(e.target.value)}
+                  type="email" placeholder="Email" id="email" required />
               </div>
-              <div class="input-box message-box">
-                <textarea placeholder="Mensagem"></textarea>
+              <div class="input-box message-box mb-5">
+              <label htmlFor="nome" className="form-label">Observação:</label>
+                <textarea value={observacao} onChange={(e) => setObservacao(e.target.value)} id="observacao" placeholder="Mensagem"></textarea>
               </div>
               <div class="button-form">
-                <input type="submit" value="Enviar" />
-              </div>
+                <input type="submit" /> 
+                </div>
             </form>
           </div>
         </div>

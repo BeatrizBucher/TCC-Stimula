@@ -10,13 +10,13 @@
     border-radius: 15px;
 }
 
-.btn {
+.btn{
     color: aliceblue;
     text-decoration: none;
 
 }
 
-.btn:hover {
+.btn:hover{
     text-decoration: none;
     color: aliceblue;
 
@@ -27,11 +27,11 @@
     color: #2e8b57;
 }
 
-.card-2 {
+.card-2{
     padding: 10px 15px 15px 20px;
     height: auto;
     box-shadow: inset 0 0 1em #2e8b57;
-    border-radius: 15px;
+    border-radius:  15px;
 }
 
 .titulo-3 {
@@ -39,11 +39,11 @@
     color: #dc3131;
 }
 
-.card-3 {
+.card-3{
     padding: 10px 15px 15px 20px;
     height: auto;
     box-shadow: inset 0 0 1em #dc3131;
-    border-radius: 15px;
+    border-radius:  15px;
 }
 
 .titulo-4 {
@@ -51,29 +51,16 @@
     color: #009be2;
 }
 
-.card-4 {
+.card-4{
     padding: 10px 15px 15px 20px;
     height: auto;
     box-shadow: inset 0 0 1em #009be2;
-    border-radius: 15px;
-}
-
-
-.card-img-historia {
-    display: flex;
-    justify-content: center;
-    margin-left: 150px;
-    width: 320px;
-    height: 300px;
-    overflow: hidden;
+    border-radius:  15px;
 }
 
 .img-historia {
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    border-radius: 15px;
+    margin-top: 20px;
 }

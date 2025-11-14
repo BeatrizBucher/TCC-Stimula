@@ -4,60 +4,69 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 const Usuarios = {
-  
+
     // cadastrar e login
-    registrarUsuarios: async (nome, sobrenome, regra, email, senha) => { 
+    registrarUsuarios: async (nome, sobrenome, regra, email, senha) => {
 
-    try {
+        try {
 
-        const password = await bcrypt.hash(senha, 10);
-        return await executeQuery(
-            'INSERT INTO usuarios (nome, sobrenome, regra, email, senha) VALUES (?,?,?,?,?)',
-            [nome, sobrenome, regra, email, password] 
-        );
-    } 
-    catch (error) 
-    {
-        throw error;
-    }
-},
+            const password = await bcrypt.hash(senha, 10);
+            return await executeQuery(
+                'INSERT INTO usuarios (nome, sobrenome, regra, email, senha) VALUES (?,?,?,?,?)',
+                [nome, sobrenome, regra, email, password]
+            );
+        }
+        catch (error) {
+            throw error;
+        }
+    },
 
     login: async (email, senha) => {
-    try {
-        const consulta = await Usuarios.getEmail(email);
-        
-        // Verifica se há registros retornados (uso correto para SELECT)
-        if (consulta.length > 0) { // Alterado aqui
-            const match = await bcrypt.compare(senha, consulta[0].senha);
+        try {
+            const consulta = await Usuarios.getEmail(email);
 
-            if (match) {
-                const token = jwt.sign(
-                    { id: consulta[0].id, email: consulta[0].email, regra: consulta[0].regra },
-                    process.env.JWT_SECRET,
-                    { expiresIn: '25m' }
-                );
-                return { token, regra: consulta[0].regra };
+            // Verifica se há registros retornados (uso correto para SELECT)
+            if (consulta.length > 0) { // Alterado aqui
+                // const match = await bcrypt.compare(senha, consulta[0].senha);
+                console.log(consulta[0].id)
+                if (senha === consulta[0].senha) {
+
+                    const token = jwt.sign(
+                        { id: consulta[0].id, email: consulta[0].email, regra: consulta[0].regra },
+                        process.env.JWT_SECRET,
+                        { expiresIn: '25m' }
+                    );
+                    return { token, regra: consulta[0].regra, id: consulta[0].id };
+                }
+
+
+                return null;
             }
             return null;
+        } catch (error) {
+            console.log(error);
+            throw error;
         }
-        return null;
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
-},
-
-    getEmail: async(email)=>{
-       return await executeQuery('SELECT id, email, nome, senha, regra FROM usuarios WHERE email=?', [email])
     },
-     
-     resetarSenha: async(email,senha) =>{
-        try{
-            
-            const hash = await bcrypt.hash(senha,10);
-            return await executeQuery('UPDATE usuarios SET senha=? WHERE email=?',[hash,email])
+
+    getEmail: async (email) => {
+        try {
+            return await executeQuery('SELECT id, email, senha, regra FROM cliente WHERE email=?', [email])
+
         }
-        catch(error){
+        catch (error) {
+            console.log(error);
+
+        }
+    },
+
+    resetarSenha: async (email, senha) => {
+        try {
+
+            const hash = await bcrypt.hash(senha, 10);
+            return await executeQuery('UPDATE usuarios SET senha=? WHERE email=?', [hash, email])
+        }
+        catch (error) {
             throw error;
         }
     }

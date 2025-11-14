@@ -1,16 +1,103 @@
 import './paginas/Demandas/Demandas.css'
-import { useState } from "react";
-
+import { notificacao, demandaErro, demandaSucesso } from "./Notificacoes";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 function MainDemanda() {
-    const [paciente, setPaciente] = useState("");
-    const [atividade, setAtividade] = useState("");
-    const [terapeuta, setTerapeuta] = useState("");
+    const [idpaciente, setIdPaciente] = useState(1);
+    const [idatividade, setIdAtividade] = useState(1);
+    const [idterapeuta, setIdTerapeuta] = useState(1);
+    const [pacientes, setPaciente] = useState([]);
+    const [atividades, setAtividade] = useState([]);
+    const [terapeutas, setTerapeuta] = useState([]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert(`Paciente: ${paciente}\nAtividade: ${atividade}`);
-    };
+    async function cadastrarDemanda(event) {
+        event.preventDefault();
+
+        let demanda = {
+            cliente_id: idpaciente,
+            terapeuta_id: idterapeuta,
+            atividade_id: idatividade
+        }
+
+        try {
+            let response = await fetch('http://localhost:3001/cadastroDemanda', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(demanda)
+            });
+
+            if (response.ok) {
+                demandaSucesso();
+                setIdPaciente('');
+                setIdAtividade('');
+                setIdTerapeuta('');
+            } else {
+                demandaErro();
+            }
+        } catch (erro) {
+            alert('Erro ao cadastrar demanda. Verifique o console.');
+        }
+    }
+
+    useEffect(() => {
+
+        const buscar = async () => {
+            try {
+                const token = localStorage.getItem('token');
+
+                if (!token) {
+                    alert('Usuário não autenticado. Por favor, faça o login.');
+                    return;
+                }
+
+                const [pacienteRes, atividadeRes, terapeutaRes] = await Promise.all([
+                    axios.get('http://localhost:3001/listarNomeCliente', {
+                        // headers: {
+                        //     Authorization: `Bearer ${token}`,
+                        // },
+                    }),
+
+                    axios.get('http://localhost:3001/listarAtividades', {
+                        // headers: {
+                        //     Authorization: `Bearer ${token}`,
+                        // },
+                    }),
+
+                    axios.get('http://localhost:3001/listarTerapeutas', {
+                        // headers: {
+                        //     Authorization: `Bearer ${token}`,
+                        // },
+                    }),
+                ]);
+
+                if (pacienteRes.status === 200) {
+                    setPaciente(pacienteRes.data);
+                } else {
+                    alert('Erro ao carregar produtos.');
+                }
+
+                if (atividadeRes.status === 200) {
+                    setAtividade(atividadeRes.data);
+                } else {
+                    alert('Erro ao carregar vendedores.');
+                }
+
+                if (terapeutaRes.status === 200) {
+                    setTerapeuta(terapeutaRes.data);
+                } else {
+                    alert('Erro ao carregar vendedores.');
+                }
+            } catch (error) {
+
+            };
+        }
+        buscar();
+    }, []);
+
+
     return (
         <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid d-flex flex-column align-items-center">
 
@@ -19,19 +106,24 @@ function MainDemanda() {
                     Cadastro de demanda
                 </h2>
                 <div className="caixa-cadastro mx-auto">
-                    <form onSubmit={handleSubmit} >
-                     
+                    <form onSubmit={cadastrarDemanda} >
+
                         <div className="mb-3">
                             <label className="form-label texto-label">Paciente:</label>
                             <select
                                 className="form-select campo-input"
-                                value={paciente}
-                                onChange={(e) => setPaciente(e.target.value)}
+                                value={idpaciente}
+                                onChange={(e) => setIdPaciente(e.target.value)}
                             >
-                                <option value="">Selecione o paciente</option>
-                                <option value="João">João</option>
-                                <option value="Maria">Maria</option>
-                                <option value="Carlos">Carlos</option>
+                                {pacientes.length === 0 ? (
+                                    <option disabled>Sem pacientes</option>
+                                ) : (
+                                    pacientes.map((paciente) => (
+                                        <option key={paciente.id} value={paciente.id}>
+                                            {paciente.nome_completo}
+                                        </option>
+                                    ))
+                                )}
                             </select>
                         </div>
 
@@ -39,13 +131,18 @@ function MainDemanda() {
                             <label className="form-label texto-label">Atividade:</label>
                             <select
                                 className="form-select campo-input"
-                                value={atividade}
-                                onChange={(e) => setAtividade(e.target.value)}
+                                value={idatividade}
+                                onChange={(e) => setIdAtividade(e.target.value)}
                             >
-                                <option value="">Selecione a atividade</option>
-                                <option value="Jogo da Memória">Jogo da Memória</option>
-                                <option value="Quiz de Palavras">Quiz de Palavras</option>
-                                <option value="Kanban Interativo">Kanban Interativo</option>
+                                {atividades.length === 0 ? (
+                                    <option disabled>Sem atividades</option>
+                                ) : (
+                                    atividades.map((atividade) => (
+                                        <option key={atividade.id} value={atividade.id}>
+                                            {atividade.nome}
+                                        </option>
+                                    ))
+                                )}
                             </select>
                         </div>
 
@@ -53,12 +150,18 @@ function MainDemanda() {
                             <label className="form-label texto-label">Terapeuta:</label>
                             <select
                                 className="form-select campo-input"
-                                value={terapeuta}
-                                onChange={(e) => setPaciente(e.target.value)}
+                                value={idterapeuta}
+                                onChange={(e) => setIdTerapeuta(e.target.value)}
                             >
-                                <option value="">Selecione o terapeuta</option>
-                                <option value="João">João</option>
-                                <option value="Maria">Maria</option>
+                                {terapeutas.length === 0 ? (
+                                    <option disabled>Sem terapeutas</option>
+                                ) : (
+                                    terapeutas.map((terapeuta) => (
+                                        <option key={terapeuta.id} value={terapeuta.id}>
+                                            {terapeuta.nome}
+                                        </option>
+                                    ))
+                                )}
                             </select>
                         </div>
 

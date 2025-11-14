@@ -2,7 +2,6 @@
 import './paginas/Games/Games.css';
 import React, { useState, useEffect } from "react";
 
-
 function MainJogoDaMemoria() {
     const animais = ['🦁', '🐯', '🦒', '🦓', '🐘', '🦍', '🦜', '🐊'];
 
@@ -44,39 +43,44 @@ function MainJogoDaMemoria() {
         }
     };
 
-    useEffect(() => iniciarJogo(), []);
+    useEffect(() =>
+        iniciarJogo(),
+        []);
+
     return (
-        <main className="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+        <main className="col-md-9 ms-sm-auto col-lg-12 px-md-4 d-flex">
+            <div className='col-8 justify-content-center align-items-center align-self-center mx-auto mt-5'>
+                <div className="jogo-memoria">
+                    <h3 className='titulo-jogo'>Encontre os Animais</h3>
 
-            <div className="jogo-memoria">
-                <h3>Encontre os Animais</h3>
+                    {pares.length === cartas.length && cartas.length > 0 && (
+                        <div className="mensagem-sucesso">
+                            Parabéns! Você encontrou todos!
+                            <button className='botao-reiniciar' onClick={iniciarJogo}>Jogar Novamente</button>
+                        </div>
+                    )}
 
-                {pares.length === cartas.length && cartas.length > 0 && (
-                    <div className="mensagem-sucesso">
-                        Parabéns! Você encontrou todos!
-                        <button onClick={iniciarJogo}>Jogar Novamente</button>
-                    </div>
-                )}
-
-                <div className="tabuleiro">
-                    {cartas.map((carta, index) => (
-                        <div
-                            key={carta.id}
-                            className={`carta 
+                    <div className="tabuleiro">
+                        {cartas.map((carta, index) => (
+                            <div
+                                key={carta.id}
+                                className={`carta 
                 ${viradas.includes(index) ? 'virada' : ''}
                 ${pares.includes(index) ? 'encontrada' : ''}`}
-                            onClick={() => virarCarta(index)}
-                        >
-                            <div className="frente">🌿</div>
-                            <div className="verso">{carta.animal}</div>
-                        </div>
-                    ))}
-                </div>
+                                onClick={() => virarCarta(index)}
+                            >
+                                <div className="frente">🌿</div>
+                                <div className="verso">{carta.animal}</div>
+                            </div>
+                        ))}
+                    </div>
 
-                <button className="botao-reiniciar" onClick={iniciarJogo}>
-                    Reiniciar
-                </button>
+                    <button className="botao-reiniciar" onClick={iniciarJogo}>
+                        Reiniciar
+                    </button>
+                </div>
             </div>
+
         </main>
     );
 }

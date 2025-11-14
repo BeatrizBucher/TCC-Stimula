@@ -1,16 +1,23 @@
 const clienteController = require('../models/clienteModel');
+const gerarSenha = require('../services/credenciais');
+const enviarEmail = require('../services/emailServices');
 
 const ControllerCliente = {
 
     async cadastrarNovoCliente(req, res) {
+
         try {
             const { nome_completo, cpf, email, cep, logradouro, cidade, uf, observacao, regra, senha} = req.body;
 
+            const password = gerarSenha();
+
             const novoCliente = await clienteController.criarCliente(
-                nome_completo, cpf, email, cep, logradouro, cidade, uf, observacao, regra, senha
+                nome_completo, cpf, email, cep, logradouro, cidade, uf, observacao, regra, password
             );
 
-            res.status(201).json({ mensagem: "Cliente cadastrado com sucesso" });
+            await enviarEmail(email,password)
+
+            res.status(201).json({ mensagem: "Cadastrado com sucesso Email e Senha enviado por email!" });
 
         } catch (error) {
             res.status(500).json({ mensagem: error.message });

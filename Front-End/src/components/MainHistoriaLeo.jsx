@@ -31,7 +31,7 @@ function MainHistoriaLeo() {
 
                     </div>
                     <div className="col-md-6 ">
-                        <img src={Leo3} className='img-historia' alt="Sample photo" />
+                        <img src={Leo3} className='img-historia mt-5' alt="Sample photo" />
                     </div>
                 </div>
 

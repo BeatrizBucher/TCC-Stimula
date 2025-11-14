@@ -7,13 +7,13 @@ const Cliente = {
     criarCliente: async (nome_completo, cpf, email, cep, logradouro, cidade, uf, observacao, regra, senha) => {
 
         try {
-            const password = await bcrypt.hash(senha, 10);
+            // const password = await bcrypt.hash(senha, 10);
 
             const result = await executeQuery(
                 `INSERT INTO cliente (
                     nome_completo, cpf, email, cep, logradouro, cidade, uf, observacao, regra, senha
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-                [nome_completo, cpf, email, cep, logradouro, cidade, uf, observacao, regra, password]
+                [nome_completo, cpf, email, cep, logradouro, cidade, uf, observacao, regra, senha]
             );
     
             return result;

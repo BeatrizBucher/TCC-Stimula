@@ -5,9 +5,9 @@
 // https://youtu.be/pn4xhOmmMVE?si=IrViPwoosIKFbpm4
 // https://youtu.be/J5r_1vB3MWg?si=chKJ0rMulQEOarah
 
-
 import './paginas/home/Home.css';
 import { useState } from "react";
+import { notificacao, notificacaoErro, notificacaoSucesso } from "./Notificacoes";
 import Book from "../img/book.png"
 import ABC from "../img/abc.png"
 import Numero from "../img/numero.png"
@@ -45,11 +45,14 @@ function MainHome() {
       })
 
       if (cadastro.status === 201) {
-        console.log('sucesso');
+        setEmail("");
+        setNome("");
+        setObservacao("");
+        notificacaoSucesso();
       }
 
     } catch (erro) {
-      console.log('erro');
+      notificacaoErro();
     }
   }
 
@@ -63,7 +66,6 @@ function MainHome() {
           </svg>
         </div>
       </div>
-
 
       <div className="row mt-3 d-flex ">
 
@@ -137,7 +139,7 @@ function MainHome() {
             <div className="col-md-7 ">
               <h1 className='bem-vindo mt-5'>Bem-Vindo ao Stimula!</h1>
               <p className='paragrafo'>
-                O Stimula nasceu com a missão de criar um espaço acolhedor, inclusivo e divertido para apoiar o desenvolvimento de crianças com TEA por meio da tecnologia. Acreditamos que aprender pode ser uma experiência leve, lúdica e cheia de descobertas, e por isso reunimos em um só lugar atividades que unem jogos e imaginação. Aqui você encontrará jogos de memória, quizzes de associação que estimulam a atenção e o raciocínio, além de um quadro interativo de rotina que incentiva a organização de forma simples e prática. Também oferecemos histórias encantadoras, criadas especialmente para despertar a curiosidade, a imaginação e a compreensão das emoções. Nosso objetivo é mostrar que cada criança tem seu próprio ritmo e potencial, e que a inclusão pode ser construída com ferramentas criativas, acessíveis e envolventes. O Stimula é mais do que uma plataforma: é um convite para brincar, aprender e crescer em um ambiente seguro, colorido e cheio de possibilidades.
+                 O Stimula nasceu com a missão de criar um espaço acolhedor, inclusivo e divertido para apoiar o desenvolvimento de crianças com TEA por meio da tecnologia. Acreditamos que aprender pode ser uma experiência leve, lúdica e cheia de descobertas, e por isso reunimos em um só lugar atividades que unem jogos e imaginação. Aqui você encontrará jogos de memória, quizzes de associação que estimulam a atenção e o raciocínio, além de um quadro interativo de rotina que incentiva a organização de forma simples e prática. Também oferecemos histórias encantadoras, criadas especialmente para despertar a curiosidade, a imaginação e a compreensão das emoções. Nosso objetivo é mostrar que cada criança tem seu próprio ritmo e potencial, e que a inclusão pode ser construída com ferramentas criativas, acessíveis e envolventes. O Stimula é mais do que uma plataforma: é um convite para brincar, aprender e crescer em um ambiente seguro, colorido e cheio de possibilidades.
               </p>
             </div>
             <div className="col-md-5 ">
@@ -210,7 +212,7 @@ function MainHome() {
             </div>
           </div>
 
-          <div class="comment-box">
+          <div class="comment-box ">
             <div class="box-top">
               <div class="Profile">
                 <div class="profile-image">
@@ -227,6 +229,8 @@ function MainHome() {
               </p>
             </div>
           </div>
+
+       
 
 
         </div>
@@ -251,7 +255,7 @@ function MainHome() {
             <div class="email details">
               <i class="fas fa-envelope icon-form"></i>
               <div class="topic">Email</div>
-              <div class="text-one">stimula@gmail.com</div>
+              <div class="text-one">stimulaempresa@gmail.com</div>
             </div>
           </div>
 
@@ -262,22 +266,27 @@ function MainHome() {
             </p>
             <form onSubmit={enviarMensagem}>
               <div class="input-box mb-5">
-              <label htmlFor="nome" className="form-label">Nome:</label>
+                <label htmlFor="nome" className="form-label">Nome:</label>
                 <input value={nome} onChange={(e) => setNome(e.target.value)}
                   type="text" placeholder="Nome" id="nome" required />
               </div>
               <div class="input-box mb-5">
-              <label htmlFor="nome" className="form-label">Email:</label>
+                <label htmlFor="nome" className="form-label">Email:</label>
                 <input value={email} onChange={(e) => setEmail(e.target.value)}
                   type="email" placeholder="Email" id="email" required />
               </div>
               <div class="input-box message-box mb-5">
-              <label htmlFor="nome" className="form-label">Observação:</label>
-                <textarea value={observacao} onChange={(e) => setObservacao(e.target.value)} id="observacao" placeholder="Mensagem"></textarea>
+                <label htmlFor="nome" className="form-label">Mensagem:</label>
+                <textarea value={observacao} onChange={(e) => setObservacao(e.target.value)} id="observacao" placeholder="Mensagem" required></textarea>
               </div>
-              <div class="button-form">
-                <input type="submit" /> 
-                </div>
+
+
+              <div className="button-form">
+                <button type="submit" className="botao-cadastrar">
+                  Enviar
+                </button>
+              </div>
+
             </form>
           </div>
         </div>

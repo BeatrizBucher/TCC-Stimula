@@ -15,7 +15,7 @@ const ControllerContrato = {
                 return res.status(404).json({ mensagem: "Cliente não encontrado" });
             }
 
-            res.status(200).json({ nome: cliente.nome_completo});
+            res.status(200).json({ nome: cliente.nome_completo });
         } catch (error) {
             res.status(500).json({ mensagem: error.message });
         }
@@ -24,7 +24,7 @@ const ControllerContrato = {
     criarDemanda: async (req, res) => {
         try {
 
-            const { cliente_id, terapeuta_id, atividade_id} = req.body;
+            const { cliente_id, terapeuta_id, atividade_id } = req.body;
 
             if (!terapeuta_id || !atividade_id || !cliente_id) {
                 return res.status(400).json({ msg: "Dados inválidos" });
@@ -42,8 +42,18 @@ const ControllerContrato = {
         }
     },
 
-    listarTodasDemandas: async (req, res) => {
-        const {id} = req.params;
+    //cliente nomes
+    listarNomesCliente: async (req, res) => {
+        try {
+            const resultado = await demandaController.buscarTodosNomesClientes();
+            res.status(200).json(resultado);
+        } catch (error) {
+            res.status(500).json({ mensagem: error.message });
+        }
+    },
+
+    listarTodasDemandasID: async (req, res) => {
+        const { id } = req.params;
 
         try {
             const resultado = await demandaController.buscarTodasDemandas(id);
@@ -53,32 +63,55 @@ const ControllerContrato = {
         }
     },
 
+    //atividade nomes
+    listarTodasAtividades: async (req, res) => {
+        try {
+            const resultado = await demandaController.buscarTodasAtividades();
+            res.status(200).json(resultado);
+        } catch (error) {
+            res.status(500).json({ mensagem: error.message });
+        }
+    },
+
+    //terapeuta nomes
+    listarTodosTerapeutas: async (req, res) => {
+        try {
+            const resultado = await demandaController.buscarTodosTerapeutas();
+            res.status(200).json(resultado);
+        } catch (error) {
+            res.status(500).json({ mensagem: error.message });
+        }
+    },
+
+    
+
+
     //nao alterei dq pra baixo
-    deletarId : async (req, res) => {
+    deletarId: async (req, res) => {
         try {
             const id = req.params.id;
-            
+
             if (!id) {
                 return res.status(400).json({ msg: "ID inválido" });
             }
-    
+
             const resultado = await demandaController.deletarDemandaId(id);
-    
-            if (resultado.affectedRows === 0) { 
+
+            if (resultado.affectedRows === 0) {
                 return res.status(404).json({ msg: "Contrato não encontrado" });
             }
-    
+
             res.status(200).json({ msg: "Contrato deletado com sucesso" });
         } catch (error) {
-         
+
             res.status(500).json({ mensagem: error.message });
         }
     },
 
     //nao alterei
     async atualizarDemandaId(req, res) {
-  
-        const{cod, status, servicos, pagamento, planos} = req.body;
+
+        const { cod, status, servicos, pagamento, planos } = req.body;
 
         const cliente_id = cod;
         const plano_id = planos;
@@ -99,9 +132,9 @@ const ControllerContrato = {
                 await demandaController.putAtualizarContrato(cliente_id, plano_id, servico_id, pagamento_id, status, req.params.id);
                 res.status(200).json({ mensagem: 'Atualizado com sucesso' });
             }
-            else{
+            else {
                 return res.status(404).json({ mensagem: 'Contrato não encontrado' });
-            }   
+            }
         } catch (error) {
             res.status(500).json({ mensagem: error.message });
         }

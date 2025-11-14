@@ -1,59 +1,66 @@
-
-.card-games{
-    margin: 10px;
-    margin-bottom: 35px;
-    background-color: rgb(231, 229, 229) !important;
-    width: 400px;
-    height: 200px;
-    border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
+.card-games {
+  margin: 10px;
+  margin-bottom: 35px;
+  background-color: rgb(231, 229, 229) !important;
+  width: auto;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card-games h1 {
-    font-size: 30px ;
-    padding-top: 10px;
-    font-weight: bold;
-    text-align: center;
-    color: #5a20c0 !important;
+  font-size: 30px;
+  padding-top: 10px;
+  font-weight: bold;
+  text-align: center;
+  color: #5a20c0 !important;
 }
 
 .card-games p {
-    font-size: 17px;
-    padding: 20px;
-    text-align: center;
-    color: #a5a2a2;
+  font-size: 17px;
+  padding: 20px;
+  text-align: center;
+  color: #a5a2a2;
 }
 
 .card-games img {
-    width: 100%;
-    height: 250px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+  width: 100%;
+  height: 250px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .btn-games {
-    font-size: 17px;
-    padding: 10px 50px;
-    border: none;
-    color: aliceblue;
-    background-color: #5a20c0 !important;
-    border-radius: 45px;
-    font-weight: 600;
-    text-transform: uppercase;
-    align-self: center; 
-    margin-bottom: 20px; 
-    cursor: pointer;
-    text-decoration: none; 
+  font-size: 17px;
+  padding: 10px 50px;
+  border: none;
+  color: aliceblue;
+  background-color: #5a20c0 !important;
+  border-radius: 45px;
+  font-weight: 600;
+  text-transform: uppercase;
+  align-self: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-/* Jogo da Memória Simplificado */
+/* Jogo da Memória */
+
+.titulo-jogo {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #5a20c0;
+}
+
 .jogo-memoria {
   margin-top: 30px;
   padding: 20px;
-  background: #e8f5e9;
+  background: #d7c3ff;
   border-radius: 10px;
   text-align: center;
 }
@@ -62,7 +69,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  max-width: 500px;
+ width: auto;;
   margin: 20px auto;
 }
 
@@ -86,12 +93,12 @@
 }
 
 .frente {
-  background: #4caf50;
+  background: #5b20c0;
   z-index: 2;
 }
 
 .verso {
-  background: #fff;
+  background: #5b20c0;
   transform: rotateY(180deg);
 }
 
@@ -106,7 +113,7 @@
 
 /* Quando encontrada */
 .carta.encontrada .verso {
-  background: #a5d6a7;
+  background: #7835ec;
   transform: rotateY(0deg);
 }
 
@@ -115,17 +122,21 @@
 }
 
 .mensagem-sucesso {
-  background: #c8e6c9;
+  background: #b697f4;
+  font-weight: bold;
+  color: #5a20c0;
+  width: auto;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 15px;
 }
 
 .botao-reiniciar {
-  background: #4caf50;
+  margin-left: 15px;
+  background: #5a20c0;
   color: white;
   border: none;
-  padding: 8px 15px;
+  padding: 5px 8px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;

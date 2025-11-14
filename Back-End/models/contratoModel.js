@@ -26,7 +26,7 @@ const Contrato = {
         }
     },
 
-    buscarTodasDemandas: async (id) => {
+    buscarTodasDemandasID: async (id) => {
 
         console.log(id);
         return await executeQuery(`
@@ -40,9 +40,23 @@ const Contrato = {
                 JOIN atividade ON atividade.id = demanda.atividade_id
                     JOIN terapeuta ON terapeuta.id = demanda.terapeuta_id
             WHERE cliente.id = ?
-        `,[id]);
+        `, [id]);
     },
 
+    //buscar todos nomes de clientes
+    buscarTodosNomesClientes: async () => {
+        return await executeQuery('SELECT nome_completo, id FROM cliente WHERE regra = ? order by nome_completo asc', ['user']);
+    },
+
+    // buscar todos terapeutas 
+    buscarTodosTerapeutas: async () => {
+        return await executeQuery('SELECT nome, id FROM terapeuta order by nome asc');
+    },
+
+    // buscar todas atividades
+    buscarTodasAtividades: async () => {
+        return await executeQuery('SELECT nome, id FROM atividade order by nome asc');
+    },
 
     //nao alterei dq pra baixo
     deletarDemandaId: async (id) => {

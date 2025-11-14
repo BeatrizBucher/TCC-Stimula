@@ -15,44 +15,22 @@ export const notificacao = (tipo, mensagem, icon) => {
 
 //Funções auxiliares para chamadas diretas
 export const notificacaoErro = (mensagem =
-    "Erro ao buscar os alunos no banco de dados!") => {
+    "Erro ao enviar a mensagem!") => {
     notificacao('error', mensagem, 'bi bi-x-circle-fill')
 };
 
 export const notificacaoSucesso = (mensagem =
-    "Sucesso ao buscar os alunos no banco de dados!") => {
+    "Mensagem enviada com sucesso!") => {
     notificacao('success', mensagem, 'bi bi-check')
 };
 
-export const notificacaoErroCliente = (mensagem =
-    "Erro ao cadastrar o cliente") => {
+export const demandaErro = (mensagem =
+    "Erro ao cadastrar a demanda") => {
     notificacao('error', mensagem, 'bi bi-x-circle-fill')
 };
 
-export const notificacaoSucessoCliente = (mensagem =
-    "Sucesso ao cadastrar o cliente!") => {
+export const demandaSucesso = (mensagem =
+    "Demanda cadastrada com sucesso!") => {
     notificacao('success', mensagem, 'bi bi-check')
-};
-export const notificacaoCep = (mensagem =
-    "CEP com número de caracteres inválidos") => {
-    notificacao('warning', mensagem)
-};
+}
 
-export const notificacaoExcluir = (mensagem =
-    "Cliente excluido com sucesso!") => {
-    notificacao('success', mensagem)
-};
-
-export const notificacaoExcluirErro = (mensagem =
-    "Falha ao excluir o cliente") => {
-    notificacao('error', mensagem)
-};
-
-export const ErroContrato = (mensagem =
-    "Falha ao encontrar o cliente") => {
-    notificacao('error', mensagem)
-};
-export const ListarCliente = (mensagem =
-    "Cliente encontrado com sucesso!") => {
-    notificacao('success', mensagem)
-};

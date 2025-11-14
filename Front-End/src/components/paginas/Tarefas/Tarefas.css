@@ -2,6 +2,13 @@ body{
     font-family: 'Poppins', sans-serif !important;
 }
 
+.icon-botao {
+  background: none;
+  border: none;
+  color: #5a20c0;
+  font-size: 18px;
+  cursor: pointer;
+}
 
 .tabela-card {
     background-color: #020202 !important;
@@ -31,7 +38,18 @@ body{
 
 .acoes-botoes {
     display: flex;
-    gap: 8px;
+    gap: 15px;
+    justify-content: center;
+}
+select {
+  width: 150px;
+  border-radius: 3px solid #000000;
+}
+
+
+.acoes-status {
+    display: flex;
+    gap: 15px;
     justify-content: center;
 }
 

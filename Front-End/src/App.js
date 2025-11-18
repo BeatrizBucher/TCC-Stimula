@@ -11,15 +11,45 @@ import Demandas from "./components/paginas/Demandas/Demandas.jsx"
 import AlternadorDeTema from "./components/AlternadorDeTema"
 import ResetarSenha from './components/paginas/Login/ReseteSenha';
 
-
+import { AuthProvider } from "./components/Context/AuthContext.jsx";
+import ProtectedRoute from "./components/Protegidas/rotasProtegidas.jsx";
+import AcessoNegado from "./components/paginas/AcessoNegado/AcessoNegado.jsx"; 
 
 function App() {
   return (
     <>
+
+     <AuthProvider>
       <AlternadorDeTema />
+
       <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/historia" element={<Historia />} />
+        <Route path="/games" element={<Games/>} />
+        <Route path="/historialeo" element={<HistoriaLeo />} />
+        <Route path="/jogodamemoria" element={<JogoDaMemoria />} />
+        <Route path="/resetarsenha" element={<ResetarSenha />} />
+        <Route path="/tarefas" element={<Tarefas />} />
+        <Route path="/" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
 
+        <Route
+          path="/demandas"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <Demandas />
+            </ProtectedRoute>
+          }
+        />
 
+        <Route path="/acesso-negado" element={<AcessoNegado />} />
+        <Route path="*" element={<NotFound />} />
+
+      </Routes>
+    </AuthProvider>
+    
+      {/* <AlternadorDeTema />
+      <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/historia" element={<Historia />} />
         <Route path="/games" element={<Games/>} />
@@ -29,9 +59,8 @@ function App() {
         <Route path="/tarefas" element={<Tarefas />} />
         <Route path="/demandas" element={<Demandas />} />
         <Route path="/" element={<Login />} />
-        {/*Rota para página 404*/}
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 }

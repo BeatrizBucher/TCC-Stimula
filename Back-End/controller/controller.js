@@ -37,7 +37,6 @@ const clienteController = {
             const resultado = await usuarioModel.login(email, senha)
 
             if (!resultado) {
-                console.log(!resultado)
                 return res.status(401).json({ msg: "Email ou senha incorretos" })
             }
             else {

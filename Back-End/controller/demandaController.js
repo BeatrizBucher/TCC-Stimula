@@ -3,6 +3,7 @@ const demandaController = require('../models/contratoModel');
 
 const ControllerContrato = {
 
+    //ok
     BuscarClientePorId: async (req, res) => {
         const { id } = req.params;
 
@@ -21,6 +22,7 @@ const ControllerContrato = {
         }
     },
 
+    //ok
     criarDemanda: async (req, res) => {
         try {
 
@@ -43,6 +45,7 @@ const ControllerContrato = {
     },
 
     //cliente nomes
+    //ok
     listarNomesCliente: async (req, res) => {
         try {
             const resultado = await demandaController.buscarTodosNomesClientes();
@@ -52,11 +55,12 @@ const ControllerContrato = {
         }
     },
 
+    //ok
     listarTodasDemandasID: async (req, res) => {
         const { id } = req.params;
 
         try {
-            const resultado = await demandaController.buscarTodasDemandas(id);
+            const resultado = await demandaController.buscarTodasDemandasID(id);
             res.status(200).json(resultado);
         } catch (error) {
             res.status(500).json({ mensagem: error.message });
@@ -64,6 +68,7 @@ const ControllerContrato = {
     },
 
     //atividade nomes
+    //ok
     listarTodasAtividades: async (req, res) => {
         try {
             const resultado = await demandaController.buscarTodasAtividades();
@@ -74,6 +79,7 @@ const ControllerContrato = {
     },
 
     //terapeuta nomes
+    //ok
     listarTodosTerapeutas: async (req, res) => {
         try {
             const resultado = await demandaController.buscarTodosTerapeutas();
@@ -83,10 +89,18 @@ const ControllerContrato = {
         }
     },
 
-    
+    getlistarDemandas: async (req, res) => {
+        try {
+            const resultado = await demandaController.buscarDemandas();
+            res.status(200).json(resultado);
+        } catch (error) {
+            res.status(500).json({ mensagem: error.message });
+        }
+
+    },
 
 
-    //nao alterei dq pra baixo
+    //ok
     deletarId: async (req, res) => {
         try {
             const id = req.params.id;
@@ -98,49 +112,54 @@ const ControllerContrato = {
             const resultado = await demandaController.deletarDemandaId(id);
 
             if (resultado.affectedRows === 0) {
-                return res.status(404).json({ msg: "Contrato não encontrado" });
+                return res.status(404).json({ msg: "Demanda não encontrado" });
             }
 
-            res.status(200).json({ msg: "Contrato deletado com sucesso" });
+            res.status(200).json({ msg: "Demanda deletada com sucesso" });
         } catch (error) {
 
             res.status(500).json({ mensagem: error.message });
         }
     },
 
-    //nao alterei
-    async atualizarDemandaId(req, res) {
-
-        const { cod, status, servicos, pagamento, planos } = req.body;
-
-        const cliente_id = cod;
-        const plano_id = planos;
-        const servico_id = servicos;
-        const pagamento_id = pagamento
-
-        console.log("aqui");
-        console.log(req.body);
-
+    atualizarDemanda: async (req, res) => {
         try {
-            if (!req.params.id) {
-                return res.status(400).json({ mensagem: 'ID inválido' });
+            const { cliente_id, terapeuta_id, atividade_id } = req.body;
+
+            if (!terapeuta_id || !atividade_id || !cliente_id) {
+                return res.status(400).json({ msg: "Dados inválidos" });
             }
 
-            const cliente = await demandaController.getContratoById(req.params.id);
+            const demandaExiste = await demandaController.listarPorID(req.params.id);
 
-            if (cliente.length > 0) {
-                await demandaController.putAtualizarContrato(cliente_id, plano_id, servico_id, pagamento_id, status, req.params.id);
-                res.status(200).json({ mensagem: 'Atualizado com sucesso' });
+            if (demandaExiste.length === 0) {
+                return res.status(404).json({ msg: `O ID ${req.params.id} não existe na base de dados` });
             }
-            else {
-                return res.status(404).json({ mensagem: 'Contrato não encontrado' });
+
+            const clienteExiste = await demandaController.validarCliente(cliente_id);
+            if (clienteExiste.length === 0) {
+                return res.status(400).json({ msg: `O cliente ${cliente_id} não existe` });
             }
+
+            await demandaController.putAtualizarDemanda(cliente_id, terapeuta_id, atividade_id, req.params.id);
+            res.status(200).json({ msg: "Demanda atualizada com sucesso!!!" });
         } catch (error) {
             res.status(500).json({ mensagem: error.message });
         }
     },
 
-    //nao alterei
+    //get atividade por id
+    listarTarefas: async(req,res)=>{
+         try { 
+            const [produtos] = await demandaController.buscarAtividadePorId(req.query);
+
+            res.status(200).json(produtos);
+        } catch (erro) {
+            res.status(500).json({ success: false, message: 'Erro ao buscar produtos' });
+        }
+    },
+
+    //ok
     getDemandaPorId: async (req, res) => {
         const { id } = req.params;
 

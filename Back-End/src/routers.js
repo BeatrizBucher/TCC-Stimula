@@ -20,14 +20,17 @@ routers.put('/atualizarCliente/:id', clienteController.atualizarId);
 routers.get('/listarClientePorId/:id', clienteController.getClientePorId);
 
 // demanda
+
+routers.get('/listarTarefas', demandaController.listarTarefas);
+routers.get('/listarDemandas', demandaController.getlistarDemandas);
 routers.get('/listarporid/:id', demandaController.BuscarClientePorId); 
 routers.post('/cadastroDemanda', demandaController.criarDemanda); 
 routers.get('/listarNomeCliente', demandaController.listarNomesCliente); //ok
 routers.get('/listarAtividades', demandaController.listarTodasAtividades); //ok
 routers.get('/listarTerapeutas', demandaController.listarTodosTerapeutas); //ok
-routers.get('/listarDemandaID/:id', demandaController.listarTodasDemandasID);
-routers.delete('/deletarDemanda/:id', demandaController.deletarId);
-routers.put('/atualizarDemanda/:id', demandaController.atualizarDemandaId);
+routers.get('/listarDemandaID/:id', demandaController.listarTodasDemandasID);//ok
+routers.delete('/deletarDemanda/:id', demandaController.deletarId); //ok
+routers.put('/atualizarDemanda/:id', demandaController.atualizarDemanda);
 routers.get('/listarDemandaPorId/:id', demandaController.getDemandaPorId);
 
 //contato

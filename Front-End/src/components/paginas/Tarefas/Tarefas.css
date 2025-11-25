@@ -35,26 +35,3 @@ body{
     vertical-align: middle !important;
     padding: 14px !important;
 }
-
-.acoes-botoes {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-select {
-  width: 150px;
-  border-radius: 3px solid #000000;
-}
-
-
-.acoes-status {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.acoes-botoes .btn {
-    border-radius: 15px !important;
-    font-weight: bold !important;
-    padding: 4px 14px !important;
-}

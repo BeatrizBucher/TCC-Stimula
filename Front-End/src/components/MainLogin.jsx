@@ -16,14 +16,13 @@ function MainLogin() {
         try {
             const response = await axios.post('http://localhost:3001/login', { email, senha });
 
-            console.log(response.data);
-
             if (response.status === 200) {
                 const accessToken = response.data.token;
+                const id = response.data.id;
                 const nome = response.data.email;
                 const regra = response.data.regra;
 
-                login(accessToken, nome, regra);
+                login(accessToken, nome, regra, id);
                 navigate('/home');
             }
         }

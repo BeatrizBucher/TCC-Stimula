@@ -10,6 +10,7 @@ import Tarefas from "./components/paginas/Tarefas/Tarefas.jsx"
 import Demandas from "./components/paginas/Demandas/Demandas.jsx"
 import AlternadorDeTema from "./components/AlternadorDeTema"
 import ResetarSenha from './components/paginas/Login/ReseteSenha';
+import EditarDemanda from "./components/paginas/Demandas/EditarDemanda.jsx";
 
 import { AuthProvider } from "./components/Context/AuthContext.jsx";
 import ProtectedRoute from "./components/Protegidas/rotasProtegidas.jsx";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/games" element={<Games/>} />
         <Route path="/historialeo" element={<HistoriaLeo />} />
         <Route path="/jogodamemoria" element={<JogoDaMemoria />} />
+        <Route path="/editar-demanda/:id" element={<EditarDemanda />} />
         <Route path="/resetarsenha" element={<ResetarSenha />} />
         <Route path="/tarefas" element={<Tarefas />} />
         <Route path="/" element={<Login />} />
@@ -41,6 +43,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
 
         <Route path="/acesso-negado" element={<AcessoNegado />} />
         <Route path="*" element={<NotFound />} />

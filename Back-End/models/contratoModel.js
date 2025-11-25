@@ -2,6 +2,28 @@ const executeQuery = require('../database/query')
 
 const Contrato = {
 
+    //atividade id
+    buscarAtividadePorId: async (id) => {
+        try {
+            const [atividade] = await executeQuery( `SELECT  
+            cliente.nome_completo as Nome, 
+            atividade.nome as Atividade, 
+            terapeuta.nome as Terapeuta, 
+            demanda.id as DemandaID
+            FROM demanda
+            JOIN cliente ON cliente.id = demanda.cliente_id
+                JOIN atividade ON atividade.id = demanda.atividade_id
+                    JOIN terapeuta ON terapeuta.id = demanda.terapeuta_id
+            WHERE cliente.id = ?
+        `, [id]);
+
+            return atividade;
+        }
+        catch (error) {
+            throw error;
+        }
+    },
+
     buscarPorId: async (id) => {
         try {
             const [cliente] = await executeQuery('SELECT nome_completo FROM cliente WHERE id = ?', [id]);
@@ -24,6 +46,22 @@ const Contrato = {
         } catch (error) {
             throw error;
         }
+    },
+
+// faça um SELECT `id`, `terapeuta_id`, `atividade_id`, `cliente_id` FROM `demanda` 
+
+buscarDemandas: async () => {
+        return await executeQuery(`
+           SELECT   
+            cliente.nome_completo as Nome, 
+            atividade.nome as Atividade, 
+            terapeuta.nome as Terapeuta,
+            demanda.id as DemandaID
+            FROM demanda
+            JOIN cliente ON cliente.id = demanda.cliente_id
+                JOIN atividade ON atividade.id = demanda.atividade_id
+                    JOIN terapeuta ON terapeuta.id = demanda.terapeuta_id
+        `);
     },
 
     buscarTodasDemandasID: async (id) => {
@@ -69,11 +107,11 @@ const Contrato = {
         }
     },
 
-    getDemandaById: async (id) => {
+    getIdContrato: async (id) => {
 
         try {
             const contrato = await executeQuery(
-                "SELECT id FROM contrato WHERE id=?", [id]
+                "SELECT id FROM demanda WHERE id=?", [id]
             );
             return contrato;
         }
@@ -82,28 +120,45 @@ const Contrato = {
         }
     },
 
-    putAtualizarContrato: async (cliente_id, plano_id, servico_id, pagamento_id, status, id) => {
-
+    putAtualizarDemanda: async (cliente_id, terapeuta_id, atividade_id, id) => {
         try {
             const result = await executeQuery(
-                "UPDATE contrato SET cliente_id=?, plano_id=?, servico_id=?, pagamento_id=?, status=? WHERE id=?",
-                [cliente_id, plano_id, servico_id, pagamento_id, status, id]
+                `UPDATE demanda 
+             SET cliente_id=?, terapeuta_id=?, atividade_id=?
+             WHERE id=?`,
+                [cliente_id, terapeuta_id, atividade_id, id]
             );
             console.log(result);
-        }
-        catch (error) {
+        } catch (error) {
             throw error;
         }
     },
-    buscarContratoPorId: async (id) => {
+
+
+    listarPorID: async (id) => {
         try {
-            const [contrato] = await executeQuery('SELECT cliente_id, plano_id, servico_id, pagamento_id, status FROM contrato WHERE id = ?', [id]);
-            return contrato;
-        }
-        catch (error) {
+            const result = await executeQuery(
+                "SELECT * FROM demanda WHERE id=?",
+                [id]
+            );
+            return result;
+        } catch (error) {
             throw error;
         }
     },
+
+    validarCliente: async (cliente_id) => {
+        try {
+            const result = await executeQuery(
+                "SELECT id FROM cliente WHERE id=?",
+                [cliente_id]
+            );
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    },
+
 
 }
 module.exports = Contrato;

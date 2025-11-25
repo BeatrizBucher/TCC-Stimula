@@ -26,7 +26,7 @@ function Navbar() {
           <Link to="/demandas" className="nav-item me-4 nav-link d-inline-flex text-decoration-none rounded text-white nav-estilo">Demandas</Link>
          </ul>
          <ul class="navbar-nav">
-          <Link to="/" className="nav-item me-5 nav-link d-inline-flex text-decoration-none rounded text-white nav-entrar">Entrar</Link>   
+          <Link to="/" className="nav-item me-5 nav-link d-inline-flex text-decoration-none rounded text-white nav-entrar">Sair</Link>   
         </ul>
       </div>
       

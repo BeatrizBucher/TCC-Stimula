@@ -91,7 +91,7 @@ function MainDemanda() {
                     alert('Erro ao carregar vendedores.');
                 }
             } catch (error) {
-
+                console.error('Erro ao buscar dados:', error);
             };
         }
         buscar();

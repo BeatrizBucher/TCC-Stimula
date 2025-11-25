@@ -1,19 +1,49 @@
-import './paginas/Tarefas/Tarefas.css'
-import React  from "react";
+import './paginas/Tarefas/Tarefas.css';
+import { useState, useEffect } from "react";
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function MainTarefas() {
-    const atividades = [
-        { id: 1, paciente: "Victor Augusto", tarapeuta: "Dra. Carla Souza", atividade: "Jogo da Memória" },
-        { id: 2, paciente: "Victor Augusto", tarapeuta: "Dra. Carla Souza", atividade: "Quiz de Português" },
-        { id: 3, paciente: "Victor Augusto", tarapeuta: "Dra. Carla Souza", atividade: "História" },
-    ]
+    const [tarefas, setTarefas] = useState([]);
+    const [id, setId] = useState('')
+
+
+    async function idUser() {
+        let regraSalvo = localStorage.getItem('id');
+        setId(regraSalvo)
+    }
+
+    const getTarefas = async () => {
+        try {
+            const resposta = await fetch(`http://localhost:3001/listarTarefas?id=${encodeURIComponent(id)}`);
+            const dados = await resposta.json();
+            setTarefas(dados);
+        }
+        catch (erro) {
+            alert("Produto não existe");
+        }
+    };
+
+    useEffect(() => {
+        getTarefas();
+        idUser();
+    }, []);
+
+    const handleDelete = async (id) => {
+        if (window.confirm("Tem certeza que deseja excluir esta demanda?")) {
+            try {
+                await axios.delete(`http://localhost:3001/deletarDemanda/${id}`);
+                setTarefas(tarefas.filter(tarefa => tarefa.id !== id));
+            } catch (error) {
+                console.error("Erro ao excluir tarefa:", error);
+            }
+        }
+    };
 
     return (
         <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid d-flex flex-column align-items-center">
-
             <div className="container mt-5">
-                <div className="tabela-card shadow">
+                <div className="tabela-card shadow mb-5">
                     <table className="table mb-0">
                         <thead className="cabecalho-tabela">
                             <tr>
@@ -25,49 +55,38 @@ function MainTarefas() {
                             </tr>
                         </thead>
                         <tbody>
-                            {atividades.map((item) => (
-                                <tr key={item.id}>
-                                    <td>{item.paciente}</td>
-                                    <td>{item.tarapeuta}</td>
-                                    <td>{item.atividade}</td>
+                            {tarefas.map((cliente) => (
+                                <tr key={cliente.id}>
+                                    <td>{cliente.Nome}</td>
+                                    <td>{cliente.Terapeuta}</td>
+                                    <td>{cliente.Atividade}</td>
                                     <td>
-                                        
-                                        <div className="acoes-status">
-
-                                            <select name="" id="">
+                                        <div>
+                                            <select  >
                                                 <option >
-                                                    <button className="btn btn-sm btn-warning text-white">
+                                                    <button >
                                                         Pendente
                                                     </button>
                                                 </option>
                                                 <option >
-                                                    <button className="btn btn-sm btn-warning text-white">
+                                                    <button >
                                                         Andamento
                                                     </button>
                                                 </option>
                                                 <option >
-                                                    <button className="btn btn-sm btn-warning text-white">
+                                                    <button >
                                                         Concluído
                                                     </button>
                                                 </option>
                                             </select>
                                         </div>
                                     </td>
-                                    
                                     <td className="acoes-botoes">
-                                        <Link
-                                            // to={`/editar-cliente/${cliente.id}`}
-                                            title="Editar"
-                                            className="icon-botao "
-                                        >
+                                        <Link to={`/editar-demanda/${cliente.id}`} title="Editar" className="icon-botao">
                                             <i className="bi bi-pencil-square"></i>
                                         </Link>
-                                        <button
-                                            // onClick={() => handleDelete(cliente.id)}
-                                            title="Excluir"
-                                            className="icon-botao"
-                                        >
-                                            <i class="bi bi-trash2-fill"></i>
+                                        <button onClick={() => handleDelete(cliente.id)} title="Excluir" className="icon-botao">
+                                            <i className="bi bi-trash2-fill"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -81,3 +100,7 @@ function MainTarefas() {
 }
 
 export default MainTarefas;
+
+
+
+

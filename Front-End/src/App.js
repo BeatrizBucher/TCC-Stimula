@@ -14,56 +14,42 @@ import EditarDemanda from "./components/paginas/Demandas/EditarDemanda.jsx";
 
 import { AuthProvider } from "./components/Context/AuthContext.jsx";
 import ProtectedRoute from "./components/Protegidas/rotasProtegidas.jsx";
-import AcessoNegado from "./components/paginas/AcessoNegado/AcessoNegado.jsx"; 
+import AcessoNegado from "./components/paginas/AcessoNegado/AcessoNegado.jsx";
 
 function App() {
   return (
     <>
 
-     <AuthProvider>
-      <AlternadorDeTema />
+      <AuthProvider>
+        <AlternadorDeTema />
 
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/historia" element={<Historia />} />
-        <Route path="/games" element={<Games/>} />
-        <Route path="/historialeo" element={<HistoriaLeo />} />
-        <Route path="/jogodamemoria" element={<JogoDaMemoria />} />
-        <Route path="/editar-demanda/:id" element={<EditarDemanda />} />
-        <Route path="/resetarsenha" element={<ResetarSenha />} />
-        <Route path="/tarefas" element={<Tarefas />} />
-        <Route path="/" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/historia" element={<Historia />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/historialeo" element={<HistoriaLeo />} />
+          <Route path="/jogodamemoria" element={<JogoDaMemoria />} />
+          <Route path="/editar-demanda/:id" element={<EditarDemanda />} />
+          <Route path="/resetarsenha" element={<ResetarSenha />} />
+          <Route path="/tarefas" element={<Tarefas />} />
+          <Route path="/" element={<Login />} />
 
-        <Route
-          path="/demandas"
-          element={
-            <ProtectedRoute allowedRoles={["admin"]}>
-              <Demandas />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/demandas"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <Demandas />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/acesso-negado" element={<AcessoNegado />} />
+          <Route path="*" element={<NotFound />} />
+
+        </Routes>
+      </AuthProvider>
 
 
-        <Route path="/acesso-negado" element={<AcessoNegado />} />
-        <Route path="*" element={<NotFound />} />
-
-      </Routes>
-    </AuthProvider>
-    
-      {/* <AlternadorDeTema />
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/historia" element={<Historia />} />
-        <Route path="/games" element={<Games/>} />
-        <Route path="/historialeo" element={<HistoriaLeo />} />
-        <Route path="/jogodamemoria" element={<JogoDaMemoria />} />
-        <Route path="/resetarsenha" element={<ResetarSenha />} />
-        <Route path="/tarefas" element={<Tarefas />} />
-        <Route path="/demandas" element={<Demandas />} />
-        <Route path="/" element={<Login />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes> */}
     </>
   );
 }

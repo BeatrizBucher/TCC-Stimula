@@ -1,5 +1,6 @@
 import Navbar from '../../template/Navbar';
 import MainHistoria from '../../MainHistoria'
+import Footer from '../../template/Footer';
 
 function CadastrarCliente() {
 
@@ -10,6 +11,7 @@ return(
                 <div className="row">
                     
                     <MainHistoria />
+                    <Footer />
 
                 </div>
             </div>

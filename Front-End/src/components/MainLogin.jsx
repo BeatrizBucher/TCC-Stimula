@@ -13,17 +13,21 @@ function MainLogin() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        try {
+       try {
             const response = await axios.post('http://localhost:3001/login', { email, senha });
 
             if (response.status === 200) {
-                const accessToken = response.data.token;
-                const id = response.data.id;
-                const nome = response.data.email;
-                const regra = response.data.regra;
+
+                const { accessToken, nome, id, regra, mudar_senha } = response.data;
 
                 login(accessToken, nome, regra, id);
-                navigate('/home');
+
+                if(mudar_senha === 1){
+                    navigate('/resetarsenha');
+                }
+                else{
+                    navigate('/home');
+                }                
             }
         }
         catch (error) {

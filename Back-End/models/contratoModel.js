@@ -5,7 +5,8 @@ const Contrato = {
     //atividade id
     buscarAtividadePorId: async (id) => {
         try {
-            const [atividade] = await executeQuery( `SELECT  
+            const atividade = await executeQuery(`  
+      SELECT  
             cliente.nome_completo as Nome, 
             atividade.nome as Atividade, 
             terapeuta.nome as Terapeuta, 
@@ -18,8 +19,10 @@ const Contrato = {
         `, [id]);
 
             return atividade;
+
         }
         catch (error) {
+            console.log(error);
             throw error;
         }
     },
@@ -48,9 +51,8 @@ const Contrato = {
         }
     },
 
-// faça um SELECT `id`, `terapeuta_id`, `atividade_id`, `cliente_id` FROM `demanda` 
 
-buscarDemandas: async () => {
+    buscarDemandas: async () => {
         return await executeQuery(`
            SELECT   
             cliente.nome_completo as Nome, 
@@ -96,7 +98,7 @@ buscarDemandas: async () => {
         return await executeQuery('SELECT nome, id FROM atividade order by nome asc');
     },
 
-    //nao alterei dq pra baixo
+
     deletarDemandaId: async (id) => {
         try {
             return await executeQuery(

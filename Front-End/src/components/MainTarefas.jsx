@@ -7,31 +7,28 @@ function MainTarefas() {
     const [tarefas, setTarefas] = useState([]);
     const [id, setId] = useState('')
 
-  useEffect(() => {
+    useEffect(() => {
         const idUsuario = localStorage.getItem('id');
         if (idUsuario) {
             setId(idUsuario);
         }
     }, []);
 
-  
     useEffect(() => {
-        if (!id) return; 
+        if (!id) return;
         async function getTarefas() {
             try {
                 const resposta = await fetch(`http://localhost:3001/listarTarefas?id=${encodeURIComponent(id)}`);
                 const dados = await resposta.json();
                 setTarefas(dados);
-                console.log(dados);
             }
             catch (erro) {
-                console.log(erro);
                 alert("Não foi possível carregar as tarefas.");
             }
         }
 
         getTarefas();
-    }, [id]); 
+    }, [id]);
 
     const handleDelete = async (id) => {
         if (window.confirm("Tem certeza que deseja excluir esta demanda?")) {

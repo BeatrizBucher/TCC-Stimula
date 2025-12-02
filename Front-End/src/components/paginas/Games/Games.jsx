@@ -1,6 +1,7 @@
 import './Games.css'
 import MainGames from '../../MainGames';
 import Navbar from '../../template/Navbar';
+import Footer from '../../template/Footer';
 import React from "react";
 
 function Games() {
@@ -14,6 +15,7 @@ function Games() {
                 <div className="row">
                   
                     <MainGames />
+                    <Footer />
 
 
                 </div>

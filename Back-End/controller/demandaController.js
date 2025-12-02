@@ -150,11 +150,15 @@ const ControllerContrato = {
 
     //get atividade por id
     listarTarefas: async(req,res)=>{
+        console.log(req.query);
          try { 
             const [produtos] = await demandaController.buscarAtividadePorId(req.query);
 
+            console.log(produtos);
+
             res.status(200).json(produtos);
         } catch (erro) {
+            console.error(erro);
             res.status(500).json({ success: false, message: 'Erro ao buscar produtos' });
         }
     },

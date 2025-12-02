@@ -80,21 +80,7 @@ const ControllerCliente = {
         }
     },
 
-    getClientePorId: async (req, res) => {
-        const { id } = req.params;
 
-        try {
-            const cliente = await clienteController.buscarClientePorId(id);
-
-            if (!cliente) {
-                return res.status(404).json({ mensagem: "Cliente não encontrado" });
-            }
-
-            res.status(200).json(cliente);
-        } catch (error) {
-            res.status(500).json({ mensagem: error.message });
-        }
-    },
 
 }
 

@@ -17,11 +17,14 @@ routers.post('/cadastroCliente', clienteController.cadastrarNovoCliente); //ok
 routers.get('listarCliente', clienteController.listarTodos );
 routers.delete('deletarcliente/:id', clienteController.deletarId);
 routers.put('/atualizarCliente/:id', clienteController.atualizarId);
-routers.get('/listarClientePorId/:id', clienteController.getClientePorId);
 
 // demanda
-
+//Rota para listar as tarefas'
 routers.get('/listarTarefas', demandaController.listarTarefas);
+
+
+
+
 routers.get('/listarDemandas', demandaController.getlistarDemandas);
 routers.get('/listarporid/:id', demandaController.BuscarClientePorId); 
 routers.post('/cadastroDemanda', demandaController.criarDemanda); 

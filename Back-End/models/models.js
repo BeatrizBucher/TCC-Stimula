@@ -25,9 +25,9 @@ const Usuarios = {
         try {
             const consulta = await Usuarios.getEmail(email);
 
-            // Verifica se há registros retornados (uso correto para SELECT)
-            if (consulta.length > 0) { // Alterado aqui
-                // const match = await bcrypt.compare(senha, consulta[0].senha);
+           
+            if (consulta.length > 0) { 
+                
                 console.log(consulta[0].id)
                 if (senha === consulta[0].senha) {
 

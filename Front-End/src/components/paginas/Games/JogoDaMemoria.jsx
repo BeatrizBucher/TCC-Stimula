@@ -1,6 +1,7 @@
 import './Games.css'
 import MainJogoDaMemoria from '../../MainJogoDaMemoria';
 import Navbar from '../../template/Navbar';
+import Footer from '../../template/Footer';
 import React from "react";
 
 function JogoDaMemoria() {
@@ -14,6 +15,7 @@ function JogoDaMemoria() {
                 <div className="row">
                   
                     <MainJogoDaMemoria />
+                    <Footer />
 
 
                 </div>

@@ -89,10 +89,8 @@ const ResetSenha = () => {
 
   return (
     <div style={styles.container}>
-      {!isMobile && (
-        <div style={styles.imageContainer}></div>
-      )}
-      
+     
+    
       <div style={styles.formContainer}>
         <div style={styles.formContent}>
           <h1 style={styles.title}>Redefinir Senha</h1>
@@ -107,7 +105,7 @@ const ResetSenha = () => {
               placeholder="Digite seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onFocus={(e) => e.target.style.borderColor = '#ff4d4d'}
+              onFocus={(e) => e.target.style.borderColor = '#5a20c0'}
               onBlur={(e) => e.target.style.borderColor = '#ddd'}
             />
           </div>
@@ -127,7 +125,7 @@ const ResetSenha = () => {
                   placeholder="Nova Senha"
                   value={novaSenha}
                   onChange={(e) => setNovaSenha(e.target.value)}
-                  onFocus={(e) => e.target.style.borderColor = '#ff4d4d'}
+                  onFocus={(e) => e.target.style.borderColor = '#5a20c0'}
                   onBlur={(e) => e.target.style.borderColor = '#ddd'}
                 />
               </div>
@@ -139,7 +137,7 @@ const ResetSenha = () => {
                   placeholder="Confirmar Nova Senha"
                   value={confirmarSenha}
                   onChange={(e) => setConfirmarSenha(e.target.value)}
-                  onFocus={(e) => e.target.style.borderColor = '#ff4d4d'}
+                  onFocus={(e) => e.target.style.borderColor = '#5a20c0'}
                   onBlur={(e) => e.target.style.borderColor = '#ddd'}
                 />
               </div>
@@ -169,14 +167,6 @@ const styles = {
     width: "100vw",
     overflow: "hidden",
   },
-  imageContainer: {
-    flex: 1,
-    backgroundImage: "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop')",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    position: "relative",
-  },
   formContainer: {
     flex: 1,
     display: "flex",
@@ -193,7 +183,7 @@ const styles = {
   title: {
     fontSize: "2rem",
     marginBottom: "0.5rem",
-    color: "#1a1a1a",
+    color: "#5a20c0",
     fontWeight: "600",
   },
   subtitle: {
@@ -216,7 +206,7 @@ const styles = {
   button: {
     width: "100%",
     padding: "14px",
-    background: "#ff4d4d",
+    background: "#5a20c0",
     color: "white",
     border: "none",
     borderRadius: "8px",
@@ -233,7 +223,7 @@ const styles = {
     fontSize: "0.9rem",
   },
   link: {
-    color: "#ff4d4d",
+    color: "#5a20c0",
     textDecoration: "none",
     fontWeight: "500",
     display: "inline-flex",
@@ -242,7 +232,7 @@ const styles = {
     transition: "all 0.3s",
   },
   errorMessage: {
-    color: "#ff4444",
+    color: "#5a20c0",
     background: "#ffecec",
     padding: "12px",
     borderRadius: "8px",

@@ -1,7 +1,8 @@
 import Navbar from '../../template/Navbar';
 import MainHistoriaLeo from '../../MainHistoriaLeo'
+import Footer from '../../template/Footer';
 
-function CadastrarCliente() {
+function Leo() {
 
 return(
 <>
@@ -10,6 +11,7 @@ return(
                 <div className="row">
                     
                     <MainHistoriaLeo />
+                    <Footer />
 
                 </div>
             </div>
@@ -17,4 +19,4 @@ return(
 );
 
 }
-export default CadastrarCliente;
+export default Leo;

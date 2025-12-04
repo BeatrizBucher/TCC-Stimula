@@ -9,25 +9,30 @@ function MainLogin() {
     const [senha, setSenha] = useState('');
     const [erroMensagem, setMensagem] = useState('');
     const navigate = useNavigate();
-    const  {login}  = useAuth();  
+    const { login } = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-       try {
+        try {
             const response = await axios.post('http://localhost:3001/login', { email, senha });
 
             if (response.status === 200) {
-
-                const { accessToken, nome, id, regra, mudar_senha } = response.data;
+                const accessToken = response.data.token;
+                const id = response.data.id;
+                const nome = response.data.email;
+                const regra = response.data.regra;
+                const mudar_senha = response.data.mudar_senha;
+                console.log(response.data.mudar_senha)
 
                 login(accessToken, nome, regra, id);
 
-                if(mudar_senha === 1){
+                if (mudar_senha === "1") {
                     navigate('/resetarsenha');
                 }
-                else{
+                else {
                     navigate('/home');
-                }                
+                }
+
             }
         }
         catch (error) {

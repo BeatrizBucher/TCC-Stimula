@@ -3,22 +3,22 @@ const executeQuery = require('../database/query')
 const Contrato = {
 
     //atividade id
-    buscarAtividadePorId: async (id) => {
+    buscarAtividadePorId: async ({id}) => {
         try {
             const atividade = await executeQuery(`  
       SELECT  
-            cliente.nome_completo as Nome, 
-            atividade.nome as Atividade, 
-            terapeuta.nome as Terapeuta, 
-            demanda.id as DemandaID
-            FROM demanda
-            JOIN cliente ON cliente.id = demanda.cliente_id
-                JOIN atividade ON atividade.id = demanda.atividade_id
-                    JOIN terapeuta ON terapeuta.id = demanda.terapeuta_id
-            WHERE cliente.id = ?
+            c.nome_completo as Nome, 
+            a.nome as Atividade, 
+            t.nome as Terapeuta, 
+            d.id as DemandaID
+            FROM demanda d
+            JOIN cliente c ON c.id = d.cliente_id
+                JOIN atividade a ON a.id = d.atividade_id
+                    JOIN terapeuta t ON t.id = d.terapeuta_id
+            WHERE c.id = ?
         `, [id]);
 
-            return atividade;
+            return [atividade];
 
         }
         catch (error) {

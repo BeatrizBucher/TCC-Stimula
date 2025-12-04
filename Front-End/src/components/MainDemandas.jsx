@@ -101,7 +101,7 @@ function MainDemanda() {
     return (
         <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid d-flex flex-column align-items-center">
 
-            <div className="container mt-3 mb-5">
+            <div className="container mt-3">
                 <h2 className="titulo-principal">
                     Cadastro de demanda
                 </h2>

@@ -34,7 +34,9 @@ function MainHistoria() {
                     <div className="col-md-6 card-2 mt-3">
                         <h2 className='titulo-2'>Luna e o Jardim dos Sons</h2>
                         <p>Luna tinha uma caixinha mágica que guardava os sons mais bonitos que ela conhecia: o riso das pessoas, o barulho da chuva e até as melodias que lembravam momentos felizes. Mas, de repente, todos os sons desapareceram e o mundo ficou em silêncio. É então que aparece um coelho de orelhas enormes para levá-la até o Jardim dos Sons, um lugar encantado que perdeu sua música. Para devolver a vida ao jardim, Luna precisará encontrar novamente o som do riso, o som da chuva e a música da amizade, cada um escondido em um desafio diferente.</p>
-                        <button type="button" class="btn btn-success btn-sm text-white">Ler mais</button>
+                         <div>
+                            <Link to="/historialuna" type="button" class="btn btn-success btn-sm text-white ">Ler mais</Link>
+                        </div>
                     </div>
                 </div>
 
@@ -42,7 +44,9 @@ function MainHistoria() {
                     <div className="col-md-6 card-3 mt-3">
                         <h2 className='titulo-3'>O Mistério das Chaves Coloridas</h2>
                         <p>Mateus adora colecionar chaves de todas as formas e cores, mas nunca imaginou que elas poderiam levá-lo a uma aventura mágica. Um dia, ele encontra um cofre misterioso com quatro fechaduras especiais e uma coruja falante que o convida a uma missão: descobrir as quatro chaves mágicas que representam coragem, amizade, criatividade e confiança.Para encontrar cada chave, Mateus precisará superar desafios encantados: atravessar uma ponte que assusta, unir animais que brigam, desenhar portas mágicas em muros e acreditar em si mesmo diante de um espelho mágico.</p>
-                        <button type="button" class="btn btn-danger btn-sm text-white">Ler mais</button>
+                        <div>
+                            <Link to="/historiamateus" type="button" class="btn btn-danger btn-sm text-white ">Ler mais</Link>
+                        </div>
                     </div>
                     <div className="col-md-6 ">
                         <img className='mt-5' src={Matheus} alt="Sample photo" />
@@ -57,7 +61,9 @@ function MainHistoria() {
                     <div className="col-md-6 card-4 mt-3">
                         <h2 className='titulo-4'>O Relógio das Emoções</h2>
                         <p>Clara é uma menina curiosa que tem um talento especial: ela consegue sentir as emoções das pessoas apenas observando os ponteiros dos relógios. Um dia, ao explorar o sótão da casa da avó, ela encontra um relógio antigo e mágico que perdeu o equilíbrio das emoções. Ele a transporta para o Mundo do Relógio Mágico, um lugar onde cada hora representa uma emoção diferente, e pede a ajuda de Clara para restaurar a alegria, a calma, a coragem e a amizade. Ao longo de sua aventura, Clara encontra desafios encantados: crianças que não conseguem rir, uma floresta agitada e ansiosa, uma ponte estreita que assusta e pessoas e animais que se sentem sozinhos.</p>
-                        <button type="button" class="btn btn-primary btn-sm text-white">Ler mais</button>
+                        <div>
+                            <Link to="/historiarelogio" type="button" class="btn btn-primary btn-sm text-white">Ler mais</Link>
+                        </div>
                     </div>
                 </div>
 

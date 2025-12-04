@@ -9,10 +9,10 @@ export default function AcessoNegado() {
               <h1 className="card-title text-danger">Acesso Negado!</h1>
               <p className="card-text">Você não tem permissão para acessar esta página.</p>
               <div className="mt-3">
-                <Link to="/home" className="btn btn-danger">Voltar</Link>
-              </div>
+                        <Link to="/home" className="btn btn-danger">Voltar</Link>
+                    </div>
             </div>
-          </div>
+          </div>    
         </div>
       </div>
     </div>

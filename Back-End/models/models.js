@@ -25,20 +25,21 @@ const Usuarios = {
         try {
             const consulta = await Usuarios.getEmail(email);
 
-           
-            if (consulta.length > 0) { 
-                
-                console.log(consulta[0].id)
-                if (senha === consulta[0].senha) {
+            if (consulta.length > 0) {
+
+                const vereficar = await bcrypt.compare(senha, consulta[0].senha);
+                const validarSenha = await senha === consulta[0].senha
+
+                if (vereficar || validarSenha) {
 
                     const token = jwt.sign(
                         { id: consulta[0].id, email: consulta[0].email, regra: consulta[0].regra },
                         process.env.JWT_SECRET,
                         { expiresIn: '25m' }
                     );
-                    return { token, regra: consulta[0].regra, id: consulta[0].id };
-                }
+                    return { token, regra: consulta[0].regra, id: consulta[0].id, mudar_senha: consulta[0].mudar_senha };
 
+                }
 
                 return null;
             }
@@ -51,7 +52,7 @@ const Usuarios = {
 
     getEmail: async (email) => {
         try {
-            return await executeQuery('SELECT id, email, senha, regra FROM cliente WHERE email=?', [email])
+            return await executeQuery('SELECT id, email, senha, regra, mudar_senha FROM cliente WHERE email=?', [email])
 
         }
         catch (error) {
@@ -64,7 +65,7 @@ const Usuarios = {
         try {
 
             const hash = await bcrypt.hash(senha, 10);
-            return await executeQuery('UPDATE usuarios SET senha=? WHERE email=?', [hash, email])
+            return await executeQuery('UPDATE cliente SET senha=?, mudar_senha=0 WHERE email=?', [hash, email])
         }
         catch (error) {
             throw error;

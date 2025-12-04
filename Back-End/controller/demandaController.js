@@ -150,7 +150,7 @@ const ControllerContrato = {
 
     //get atividade por id
     listarTarefas: async(req,res)=>{
-        console.log(req.query);
+        console.log("Id do usuario:", req.query);
          try { 
             const [produtos] = await demandaController.buscarAtividadePorId(req.query);
 

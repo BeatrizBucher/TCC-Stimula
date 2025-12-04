@@ -71,7 +71,7 @@ function MainHome() {
 
         {/* topicos */}
         <div>
-          <h2 className='titulo-inicial mt-5'>Por que nos escolher?</h2>
+          <h2 className='titulo-inicial mt-5'>Por que nos escolher</h2>
         </div>
 
         <div className='row p-2 row-cols-1 row-cols-md-3 row-cols-lg-4 g-3'>
@@ -242,18 +242,18 @@ function MainHome() {
         <div class="content-form">
           <div class="left-side">
             <div class="address details">
-              <i class="fas fa-map-marker-alt "></i>
+              <i class="fas fa-map-marker-alt icon-form"></i>
               <div class="topic">Endereço</div>
               <div class="text-one">Rua das Anjos, 245 – Centro</div>
               <div class="text-two">Garça – SP, 17400-000</div>
             </div>
             <div class="phone details">
-              <i class="fas fa-phone-alt "></i>
+              <i class="fas fa-phone-alt icon-form"></i>
               <div class="topic">Telefone</div>
               <div class="text-one">14 99978-5615</div>
             </div>
             <div class="email details">
-              <i class="fas fa-envelope "></i>
+              <i class="fas fa-envelope icon-form"></i>
               <div class="topic">Email</div>
               <div class="text-one">stimulaempresa@gmail.com</div>
             </div>

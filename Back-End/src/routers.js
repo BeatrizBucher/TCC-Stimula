@@ -20,7 +20,7 @@ routers.put('/atualizarCliente/:id', clienteController.atualizarId);
 
 // demanda
 //Rota para listar as tarefas'
-routers.get('/listarTarefas', demandaController.listarTarefas);
+routers.get('/listarDemandaUsuario', demandaController.listarTarefas);
 
 
 

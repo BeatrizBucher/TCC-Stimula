@@ -1,9 +1,11 @@
 
 import './paginas/Games/Games.css';
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
+import { FaArrowLeft } from 'react-icons/fa';
 
 function MainJogoDaMemoria() {
-    const animais = ['🦁', '🐯', '🦒', '🦓', '🐘', '🦍', '🦜', '🐊'];
+    const animais = ['🦁', '🐯', '🦒', '🦓', '🐘', '🦍', '🦜', '🐊', '🐷', '🐮', '🐰', '🐼'];
 
     const [cartas, setCartas] = useState([]);
     const [viradas, setViradas] = useState([]);
@@ -49,8 +51,16 @@ function MainJogoDaMemoria() {
 
     return (
         <main className="col-md-9 ms-sm-auto col-lg-12 px-md-4 d-flex">
-            <div className='col-8 justify-content-center align-items-center align-self-center mx-auto mt-5'>
-                <div className="jogo-memoria">
+            <Link
+                to="/nivel"
+                className="btn botao-voltar"
+            >
+                <FaArrowLeft size={16} color="#fff" />
+                Voltar
+            </Link>
+
+            <div className='col-8 justify-content-center align-items-center align-self-center mx-auto mt-3'>
+                <div className="jogo-memoria mb-5 shadow p-4 rounded">
                     <h3 className='titulo-jogo'>Encontre os Animais</h3>
 
                     {pares.length === cartas.length && cartas.length > 0 && (

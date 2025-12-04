@@ -31,7 +31,6 @@ function App() {
       <AuthProvider>
 
         <Routes>
-
           <Route path="/nivel" element={<Nivel />} />
           <Route path="/quizPortugues" element={<GamesQuizPortugues />} />
           <Route path="/quizNumeros" element={<GamesQuizNumero />} />
@@ -61,6 +60,14 @@ function App() {
             }
           />
 
+          {/* <Route
+            path="/editar-demanda/:id"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <EditarDemanda />
+              </ProtectedRoute>
+            }
+          /> */}
 
           <Route path="/acesso-negado" element={<AcessoNegado />} />
           <Route path="*" element={<NotFound />} />

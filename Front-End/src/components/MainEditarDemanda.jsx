@@ -1,176 +1,171 @@
-// import './paginas/Demandas/Demandas.css'
-// import { useParams, useState, useEffect } from "react";
-// import axios from 'axios';
+import './paginas/Demandas/Demandas.css'
+import { useParams, useState, useEffect, useContext } from "react";
+import axios from 'axios';
+import { AuthContext } from "./Context/AuthContext";
 
-// function MainEditarDemanda() {
-//     const [idpaciente, setIdPaciente] = useState('1');
-//     const [idatividade, setIdAtividade] = useState('1');
-//     const [idterapeuta, setIdTerapeuta] = useState('1');
-//     const [pacientes, setPaciente] = useState([]);
-//     const [atividades, setAtividade] = useState([]);
-//     const [terapeutas, setTerapeuta] = useState([]);
+function MainEditarDemanda() {
 
-//       const  {id}  = useParams()
+    const [idpaciente, setIdPaciente] = useState('');
+    const [idatividade, setIdAtividade] = useState('');
+    const [idterapeuta, setIdTerapeuta] = useState('');
+    const [pacientes, setPaciente] = useState([]);
+    const [atividades, setAtividade] = useState([]);
+    const [terapeutas, setTerapeuta] = useState([]);
+    const [carregando, setCarregando] = useState(true);
+
+    useEffect(() => {
+        buscarDados();
+    }, []);
+
+    async function buscarDados() {
+        try {
+            const id = localStorage.getItem('id');
+
+            const demandaRes = await axios.get(`http://localhost:3001/api/demanda/${id}`, {
+
+            });
+
+            const [pacienteRes, atividadeRes, terapeutaRes] = await Promise.all([
+                axios.get('http://localhost:3001/listarNomeCliente', {
+
+                }),
+                axios.get('http://localhost:3001/listarAtividades', {
+
+                }),
+                axios.get('http://localhost:3001/listarTerapeutas', {
+
+                })
+            ]);
+
+            if (demandaRes.status === 200) {
+                const demanda = demandaRes.data;
+                setIdPaciente(demanda.idpaciente || '');
+                setIdAtividade(demanda.idatividade || '');
+                setIdTerapeuta(demanda.idterapeuta || '');
+            }
+
+            if (pacienteRes.status === 200) {
+                setPaciente(pacienteRes.data);
+            }
+            if (atividadeRes.status === 200) {
+                setAtividade(atividadeRes.data);
+            }
+            if (terapeutaRes.status === 200) {
+                setTerapeuta(terapeutaRes.data);
+            }
+
+            setCarregando(false);
+        } catch (error) {
+            console.error('Erro ao buscar dados:', error);
+            alert('Erro ao carregar dados da demanda');
+            setCarregando(false);
+        }
+    }
 
 
-//     async function editarDemanda(event) {
-//         event.preventDefault();
-//         console.log(`Editado com sucesso!`);
+    async function editarDemanda(event,id) {
+        event.preventDefault();
 
-//         // construindo o objeto aluno
-//         let cliente = {
-//             idpaciente,
-//             idatividade,
-//             idterapeuta,
-//         };
-         
+        const cliente = {
+            idpaciente,
+            idatividade,
+            idterapeuta,
+        };
 
-//         try {
-//             let cadastro = await axios.put(`http://localhost:3001/api/atualizarCliente/${id}`,cliente, {
-//                 headers: {                    
-//                     'Authorization': `Bearer ${token}`
-//                 },
-//             })
-//             if (cadastro.status === 200) {
-//                 alert(`cliente atualizado com sucesso`);
-//             }
+        try {
+            const cadastro = await axios.put(`http://localhost:3001/api/atualizarCliente/${id}`, cliente, {
+                // headers: {
+                //     'Authorization': `Bearer ${token}`
+                // },
+            });
 
-//         } catch (erro) {
-//             alert(`Erro ao atualizar cliente: ${erro}`);
-//         }
+            if (cadastro.status === 200) {
+                alert('Cliente atualizado com sucesso!');
+            }
+        } catch (erro) {
+            alert(`Erro ao atualizar cliente: ${erro.message}`);
+        }
+    }
 
-//     }
+    if (carregando) {
+        return <div className="text-center mt-5"><p>Carregando dados...</p></div>;
+    }
 
-//         useEffect(() => {
-//             async function buscarDados() {
-//                 try {
+    return (
+        <>
+            <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid d-flex flex-column align-items-center">
+                <div className="container mt-3">
+                    <h2 className="titulo-principal">Editar demanda</h2>
+                    <div className="caixa-cadastro mx-auto">
+                        <form onSubmit={editarDemanda}>
+                            <div className="mb-3">
+                                <label className="form-label texto-label">Paciente:</label>
+                                <select
+                                    className="form-select campo-input"
+                                    value={idpaciente}
+                                    onChange={(e) => setIdPaciente(e.target.value)}
+                                >
+                                    {pacientes.length === 0 ? (
+                                        <option disabled>Sem pacientes</option>
+                                    ) : (
+                                        pacientes.map((paciente) => (
+                                            <option key={paciente.id} value={paciente.id}>
+                                                {paciente.nome_completo}
+                                            </option>
+                                        ))
+                                    )}
+                                </select>
+                            </div>
 
+                            <div className="mb-3">
+                                <label className="form-label texto-label">Atividade:</label>
+                                <select
+                                    className="form-select campo-input"
+                                    value={idatividade}
+                                    onChange={(e) => setIdAtividade(e.target.value)}
+                                >
+                                    {atividades.length === 0 ? (
+                                        <option disabled>Sem atividades</option>
+                                    ) : (
+                                        atividades.map((atividade) => (
+                                            <option key={atividade.id} value={atividade.id}>
+                                                {atividade.nome}
+                                            </option>
+                                        ))
+                                    )}
+                                </select>
+                            </div>
 
-//                     const [pacienteRes, atividadeRes, terapeutaRes] = await Promise.all([
-//                         axios.get('http://localhost:3001/listarNomeCliente', {
-//                             // headers: {
-//                             //     Authorization: `Bearer ${token}`,
-//                             // },
-//                         }),
+                            <div className="mb-3">
+                                <label className="form-label texto-label">Terapeuta:</label>
+                                <select
+                                    className="form-select campo-input"
+                                    value={idterapeuta}
+                                    onChange={(e) => setIdTerapeuta(e.target.value)}
+                                >
+                                    {terapeutas.length === 0 ? (
+                                        <option disabled>Sem terapeutas</option>
+                                    ) : (
+                                        terapeutas.map((terapeuta) => (
+                                            <option key={terapeuta.id} value={terapeuta.id}>
+                                                {terapeuta.nome}
+                                            </option>
+                                        ))
+                                    )}
+                                </select>
+                            </div>
 
-//                         axios.get('http://localhost:3001/listarAtividades', {
-//                             // headers: {
-//                             //     Authorization: `Bearer ${token}`,
-//                             // },
-//                         }),
+                            <div className="text-center">
+                                <button type="submit" className="botao-cadastrar">
+                                    Editar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </>
+    );
+}
 
-//                         axios.get('http://localhost:3001/listarTerapeutas', {
-//                             // headers: {
-//                             //     Authorization: `Bearer ${token}`,
-//                             // },
-//                         }),
-//                     ]);
-
-//                     if (pacienteRes.status === 200) {
-//                         setPaciente(pacienteRes.data);
-//                     } else {
-//                         alert('Erro ao carregar produtos.');
-//                     }
-
-//                     if (atividadeRes.status === 200) {
-//                         setAtividade(atividadeRes.data);
-//                     } else {
-//                         alert('Erro ao carregar vendedores.');
-//                     }
-
-//                     if (terapeutaRes.status === 200) {
-//                         setTerapeuta(terapeutaRes.data);
-//                     } else {
-//                         alert('Erro ao carregar vendedores.');
-//                     }
-//                 } catch (error) {
-//                     console.error('Erro ao buscar dados:', error);
-//                 };
-//             }
-//             buscarDados();
-//         });
-    
-
-//         return (
-//             <>
-//                 <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid d-flex flex-column align-items-center">
-
-//                     <div className="container mt-3">
-//                         <h2 className="titulo-principal">
-//                             Editar demanda
-//                         </h2>
-//                         <div className="caixa-cadastro mx-auto">
-//                             <form onSubmit={editarDemanda} >
-
-//                                 <div className="mb-3">
-//                                     <label className="form-label texto-label">Paciente:</label>
-//                                     <select
-//                                         className="form-select campo-input"
-//                                         value={idpaciente}
-//                                         onChange={(e) => setIdPaciente(e.target.value)}
-//                                     >
-//                                         {pacientes.length === 0 ? (
-//                                             <option disabled>Sem pacientes</option>
-//                                         ) : (
-//                                             pacientes.map((paciente) => (
-//                                                 <option key={paciente.id} value={paciente.id}>
-//                                                     {paciente.nome_completo}
-//                                                 </option>
-//                                             ))
-//                                         )}
-//                                     </select>
-//                                 </div>
-
-//                                 <div className="mb-3">
-//                                     <label className="form-label texto-label">Atividade:</label>
-//                                     <select
-//                                         className="form-select campo-input"
-//                                         value={idatividade}
-//                                         onChange={(e) => setIdAtividade(e.target.value)}
-//                                     >
-//                                         {atividades.length === 0 ? (
-//                                             <option disabled>Sem atividades</option>
-//                                         ) : (
-//                                             atividades.map((atividade) => (
-//                                                 <option key={atividade.id} value={atividade.id}>
-//                                                     {atividade.nome}
-//                                                 </option>
-//                                             ))
-//                                         )}
-//                                     </select>
-//                                 </div>
-
-//                                 <div className="mb-3">
-//                                     <label className="form-label texto-label">Terapeuta:</label>
-//                                     <select
-//                                         className="form-select campo-input"
-//                                         value={idterapeuta}
-//                                         onChange={(e) => setIdTerapeuta(e.target.value)}
-//                                     >
-//                                         {terapeutas.length === 0 ? (
-//                                             <option disabled>Sem terapeutas</option>
-//                                         ) : (
-//                                             terapeutas.map((terapeuta) => (
-//                                                 <option key={terapeuta.id} value={terapeuta.id}>
-//                                                     {terapeuta.nome}
-//                                                 </option>
-//                                             ))
-//                                         )}
-//                                     </select>
-//                                 </div>
-
-//                                 <div className="text-center">
-//                                     <button type="submit" className="botao-cadastrar">
-//                                         Editar
-//                                     </button>
-//                                 </div>
-//                             </form>
-//                         </div>
-//                     </div>
-
-//                 </main>
-//             </>
-//         );
-//     }
-
-//     export default MainEditarDemanda;
+export default MainEditarDemanda;

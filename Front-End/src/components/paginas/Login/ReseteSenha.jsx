@@ -232,8 +232,8 @@ const styles = {
     transition: "all 0.3s",
   },
   errorMessage: {
-    color: "#5a20c0",
-    background: "#ffecec",
+    color: "#fff",
+    background: "#6e35d1",
     padding: "12px",
     borderRadius: "8px",
     marginBottom: "1.5rem",

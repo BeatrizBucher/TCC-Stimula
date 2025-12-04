@@ -126,11 +126,17 @@ const ControllerContrato = {
         try {
             const { cliente_id, terapeuta_id, atividade_id } = req.body;
 
+            console.log(req.body);
+      
             if (!terapeuta_id || !atividade_id || !cliente_id) {
                 return res.status(400).json({ msg: "Dados inválidos" });
             }
 
+            console.log(req.params.DemandaID);
+
             const demandaExiste = await demandaController.listarPorID(req.params.id);
+
+            console.log(demandaExiste);
 
             if (demandaExiste.length === 0) {
                 return res.status(404).json({ msg: `O ID ${req.params.id} não existe na base de dados` });

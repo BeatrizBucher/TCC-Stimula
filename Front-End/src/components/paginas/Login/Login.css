@@ -24,6 +24,11 @@
   font-weight: bold;
 }
 
+.cor-resetarsenha {
+  color: #5a20c0 !important;
+  font-weight: 800;
+}
+
 
 .input-group {
   margin-bottom: 1.5rem;

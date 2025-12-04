@@ -70,6 +70,8 @@ function MainLogin() {
                     </div>
 
                     <button className="button">Entrar</button>
+                    <p className="register-link  mt-3">Esqueceu sua senha? <Link className="text-decoration-none cor-resetarsenha" to="/resetarsenha">Resetar</Link></p>
+
 
                 </form>
             </div>

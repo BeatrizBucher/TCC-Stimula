@@ -37,7 +37,6 @@ function MainLogin() {
         }
         catch (error) {
             setMensagem('Email ou senha incorretos')
-
         }
     }
 

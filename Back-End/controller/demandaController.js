@@ -1,5 +1,4 @@
-const cliente = require('../config/db');
-const demandaController = require('../models/contratoModel');
+const demandaController = require('../models/demandaModel');
 
 const ControllerContrato = {
 
@@ -61,6 +60,8 @@ const ControllerContrato = {
 
         try {
             const resultado = await demandaController.buscarTodasDemandasID(id);
+
+            console.log(resultado);
             res.status(200).json(resultado);
         } catch (error) {
             res.status(500).json({ mensagem: error.message });
@@ -122,42 +123,37 @@ const ControllerContrato = {
         }
     },
 
-    atualizarDemanda: async (req, res) => {
-        try {
-            const { cliente_id, terapeuta_id, atividade_id } = req.body;
+   atualizarDemanda: async (req, res) => {
+    try {
+        const { cliente_id, terapeuta_id, atividade_id } = req.body;
 
-            console.log(req.body);
-      
-            if (!terapeuta_id || !atividade_id || !cliente_id) {
-                return res.status(400).json({ msg: "Dados inválidos" });
-            }
-
-            console.log(req.params.DemandaID);
-
-            const demandaExiste = await demandaController.listarPorID(req.params.id);
-
-            console.log(demandaExiste);
-
-            if (demandaExiste.length === 0) {
-                return res.status(404).json({ msg: `O ID ${req.params.id} não existe na base de dados` });
-            }
-
-            const clienteExiste = await demandaController.validarCliente(cliente_id);
-            if (clienteExiste.length === 0) {
-                return res.status(400).json({ msg: `O cliente ${cliente_id} não existe` });
-            }
-
-            await demandaController.putAtualizarDemanda(cliente_id, terapeuta_id, atividade_id, req.params.id);
-            res.status(200).json({ msg: "Demanda atualizada com sucesso!!!" });
-        } catch (error) {
-            res.status(500).json({ mensagem: error.message });
+        if (!terapeuta_id || !atividade_id || !cliente_id) {
+            return res.status(400).json({ msg: "Dados inválidos" });
         }
-    },
+
+        const demandaExiste = await demandaController.listarPorID(req.params.id);
+
+        if (demandaExiste.length === 0) {
+            return res.status(404).json({ msg: `O ID ${req.params.id} não existe na base de dados` });
+        }
+
+        const clienteExiste = await demandaController.validarCliente(cliente_id);
+        
+        if (clienteExiste.length === 0) {
+            return res.status(400).json({ msg: `O cliente ${cliente_id} não existe` });
+        }
+
+        await demandaController.putAtualizarDemanda(cliente_id, terapeuta_id, atividade_id, req.params.id);
+        res.status(200).json({ msg: "Demanda atualizada com sucesso!!!" });
+    } catch (error) {
+        res.status(500).json({ mensagem: error.message });
+    }
+},
 
     //get atividade por id
-    listarTarefas: async(req,res)=>{
+    listarTarefas: async (req, res) => {
         console.log("Id do usuario:", req.query);
-         try { 
+        try {
             const [produtos] = await demandaController.buscarAtividadePorId(req.query);
 
             console.log(produtos);

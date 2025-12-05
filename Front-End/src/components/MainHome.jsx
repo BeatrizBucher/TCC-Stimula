@@ -5,7 +5,7 @@
 // https://youtu.be/pn4xhOmmMVE?si=IrViPwoosIKFbpm4
 // https://youtu.be/J5r_1vB3MWg?si=chKJ0rMulQEOarah
 
-import './paginas/home/Home.css';
+import './paginas/Home/Home.css';
 import { useState } from "react";
 import { notificacao, notificacaoErro, notificacaoSucesso } from "./Notificacoes";
 import Book from "../img/book.png"
@@ -69,7 +69,7 @@ function MainHome() {
 
       <div className="row mt-3 d-flex ">
 
-        {/* topicos */}
+
         <div>
           <h2 className='titulo-inicial mt-5'>Por que nos escolher</h2>
         </div>
@@ -79,7 +79,7 @@ function MainHome() {
           <div className="col d-flex">
             <div className="card-teste">
               <div className="img-box">
-                <img src={Book} alt="Sample photo" />
+                <img src={Book} alt="Foto de um livro" />
               </div>
               <h5 className='card-titulo'>Leitura</h5>
               <div className="content-teste">
@@ -92,7 +92,7 @@ function MainHome() {
           <div className="col d-flex">
             <div className="card-teste">
               <div className="img-box">
-                <img src={Numero} alt="Sample photo" />
+                <img src={Numero} alt="Foto de um numero" />
               </div>
               <h5 className='card-titulo'>Números</h5>
               <div className="content-teste">
@@ -105,7 +105,7 @@ function MainHome() {
           <div className="col d-flex">
             <div className="card-teste">
               <div className="img-box">
-                <img src={ABC} alt="Sample photo" />
+                <img src={ABC} alt="Foto do ABC" />
               </div>
               <h5 className='card-titulo'>Alfabetização</h5>
               <div className="content-teste">
@@ -118,7 +118,7 @@ function MainHome() {
           <div className="col d-flex">
             <div className="card-teste">
               <div className="img-box">
-                <img src={Lampada} alt="Sample photo" />
+                <img src={Lampada} alt="Foto de uma lampada" />
               </div>
               <h5 className='card-titulo'>Raciocínio</h5>
               <div className="content-teste">
@@ -139,7 +139,7 @@ function MainHome() {
             <div className="col-md-7 ">
               <h1 className='bem-vindo mt-5'>Bem-Vindo ao Stimula!</h1>
               <p className='paragrafo'>
-                 O Stimula nasceu com a missão de criar um espaço acolhedor, inclusivo e divertido para apoiar o desenvolvimento de crianças com TEA por meio da tecnologia. Acreditamos que aprender pode ser uma experiência leve, lúdica e cheia de descobertas, e por isso reunimos em um só lugar atividades que unem jogos e imaginação. Aqui você encontrará jogos de memória, quizzes de associação que estimulam a atenção e o raciocínio, além de um quadro interativo de rotina que incentiva a organização de forma simples e prática. Também oferecemos histórias encantadoras, criadas especialmente para despertar a curiosidade, a imaginação e a compreensão das emoções. Nosso objetivo é mostrar que cada criança tem seu próprio ritmo e potencial, e que a inclusão pode ser construída com ferramentas criativas, acessíveis e envolventes. O Stimula é mais do que uma plataforma: é um convite para brincar, aprender e crescer em um ambiente seguro, colorido e cheio de possibilidades.
+                O Stimula nasceu com a missão de criar um espaço acolhedor, inclusivo e divertido para apoiar o desenvolvimento de crianças com TEA por meio da tecnologia. Acreditamos que aprender pode ser uma experiência leve, lúdica e cheia de descobertas, e por isso reunimos em um só lugar atividades que unem jogos e imaginação. Aqui você encontrará jogos de memória, quizzes de associação que estimulam a atenção e o raciocínio, além de um quadro de organização de forma simples e prática. Também oferecemos histórias encantadoras, criadas especialmente para despertar a curiosidade, a imaginação e a compreensão das emoções. Nosso objetivo é mostrar que cada criança tem seu próprio ritmo e potencial, e que a inclusão pode ser construída com ferramentas criativas, acessíveis e envolventes. O Stimula é mais do que uma plataforma: é um convite para brincar, aprender e crescer em um ambiente seguro, colorido e cheio de possibilidades.
               </p>
             </div>
             <div className="col-md-5 ">
@@ -230,7 +230,7 @@ function MainHome() {
             </div>
           </div>
 
-       
+
 
 
         </div>

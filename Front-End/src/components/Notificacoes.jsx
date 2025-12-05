@@ -13,7 +13,6 @@ export const notificacao = (tipo, mensagem, icon) => {
     });
 }
 
-//Funções auxiliares para chamadas diretas
 export const notificacaoErro = (mensagem =
     "Erro ao enviar a mensagem!") => {
     notificacao('error', mensagem, 'bi bi-x-circle-fill')
@@ -33,4 +32,7 @@ export const demandaSucesso = (mensagem =
     "Demanda cadastrada com sucesso!") => {
     notificacao('success', mensagem, 'bi bi-check')
 }
-
+export const semAtividades = (mensagem =
+    "Você ainda não possui atividades!") => {
+    notificacao('warning', mensagem)
+}

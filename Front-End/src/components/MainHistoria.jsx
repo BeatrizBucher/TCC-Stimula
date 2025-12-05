@@ -22,14 +22,14 @@ function MainHistoria() {
                     </div>
                     <div className="col-md-6 d-flex">
                         <div className='card-img-historia'>
-                            <img className='' src={Leo} alt="Sample photo" />
+                            <img className='' src={Leo} alt="Historia do leo" />
                         </div>
                     </div>
                 </div>
 
                 <div className="row mt-3">
                     <div className="col-md-6 ">
-                        <img className='mt-3' src={Luna} alt="Sample photo" />
+                        <img className='mt-3' src={Luna} alt="Historia da luna" />
                     </div>
                     <div className="col-md-6 card-2 mt-3">
                         <h2 className='titulo-2'>Luna e o Jardim dos Sons</h2>
@@ -49,13 +49,13 @@ function MainHistoria() {
                         </div>
                     </div>
                     <div className="col-md-6 ">
-                        <img className='mt-5' src={Matheus} alt="Sample photo" />
+                        <img className='mt-5' src={Matheus} alt="Historia da luna" />
                     </div>
                 </div>
 
                 <div className="row mt-3 mb-5 mt-3">
                     <div className="col-md-6 ">
-                        <img className='mt-5 ' src={Clara} alt="Sample photo" />
+                        <img className='mt-5 ' src={Clara} alt="Historia de clara" />
 
                     </div>
                     <div className="col-md-6 card-4 mt-3">

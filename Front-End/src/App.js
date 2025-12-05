@@ -1,4 +1,4 @@
-import Home from "./components/paginas/home/Home";
+import Home from "./components/paginas/Home/Home.jsx";
 import Login from "./components/paginas/Login/Login";
 import NotFound from "./components/paginas/404/NotFound";
 import { Route, Routes } from "react-router-dom";
@@ -59,15 +59,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
-          {/* <Route
-            path="/editar-demanda/:id"
-            element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <EditarDemanda />
-              </ProtectedRoute>
-            }
-          /> */}
 
           <Route path="/acesso-negado" element={<AcessoNegado />} />
           <Route path="*" element={<NotFound />} />

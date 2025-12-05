@@ -1,6 +1,7 @@
 import './paginas/Tarefas/Tarefas.css';
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { notificacao, semAtividades } from "./Notificacoes";
 import { Link } from 'react-router-dom';
 
 function MainTarefas() {
@@ -21,7 +22,7 @@ function MainTarefas() {
             console.log(dados);
 
             if (dados.length === 0) {
-                alert("Você ainda não possui atividades");
+                semAtividades();
             }
             else {
                 setTarefas(dados);

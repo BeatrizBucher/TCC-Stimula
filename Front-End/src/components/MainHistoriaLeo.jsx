@@ -10,7 +10,6 @@ function MainHistoriaLeo() {
     return (
         <main className="col-md-12 ms-sm-auto col-lg-12 px-md-4 container-fluid">
 
-            {/* Botão voltar */}
             <div className="mt-3">
                 <Link 
                     to="/historia" 
@@ -21,7 +20,6 @@ function MainHistoriaLeo() {
                 </Link>
             </div>
 
-            {/* PRIMEIRO BLOCO */}
             <div className="row justify-content-between mt-4 align-items-center">
                 <div className="col-md-6">
                     <h2 className='titulo'>Léo e a estrela brilhante 🌟</h2>
@@ -56,7 +54,6 @@ function MainHistoriaLeo() {
                 </div>
             </div>
 
-            {/* SEGUNDO BLOCO */}
             <div className="row mt-5 align-items-center">
                 <div className="col-md-6">
                     <img 
@@ -87,7 +84,6 @@ function MainHistoriaLeo() {
                 </div>
             </div>
 
-            {/* TERCEIRO BLOCO */}
             <div className="row mt-5 align-items-center mb-5">
                 <div className="col-md-6 mt-3">
                     <p>Por fim, Léo encontrou um campo sem flores. Uma tartaruga chorava devagarinho.</p>

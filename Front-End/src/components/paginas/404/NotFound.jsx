@@ -10,7 +10,6 @@ function NotFound() {
                     <h1>404</h1>
                     <p>Oops! A página que você está procurando não existe.</p>
                     
-                    {/* Botão de contingência caso o redirecionamento automático falhe */}
                     <div className="mt-3">
                         <Link to="/home" className="btn btn-danger">Voltar</Link>
                     </div>

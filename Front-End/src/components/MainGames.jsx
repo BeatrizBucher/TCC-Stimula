@@ -30,7 +30,7 @@ function MainGames() {
 
                 <div className="col-md-6 col-lg-3 mb-4">
                     <div class="card-games">
-                        <img src={QuizMatematica} alt="jogo da memoria" />
+                        <img src={QuizMatematica} alt="quiz de matematica" />
                         <h1>Quiz de número</h1>
                         <p className='mt-3'>Conte, some e aprenda jogando.
                             Resolva desafios com os números.
@@ -41,7 +41,7 @@ function MainGames() {
 
                 <div className="col-md-6 col-lg-3 mb-4">
                     <div class="card-games">
-                        <img src={QuizPortugues} alt="jogo da memoria" />
+                        <img src={QuizPortugues} alt="quiz de portugues" />
                         <h1>Quiz de português</h1>
                         <p className='mt-3'>Explore letras e novas palavras.
                             Aprenda português brincando.
@@ -52,7 +52,7 @@ function MainGames() {
 
                 <div className="col-md-6 col-lg-3 mb-4">
                     <div class="card-games">
-                        <img src={QuizAssociacao} alt="jogo da memoria" />
+                        <img src={QuizAssociacao} alt="quiz de associação das formas" />
                         <h1>Associação de formas</h1>
                         <p className='mt-3'>Observe, compare e combine.
                             Junte as formas com seus nomes.

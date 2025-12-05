@@ -66,21 +66,27 @@ const Contrato = {
         `);
     },
 
-    buscarTodasDemandasID: async (id) => {
+    
 
-        console.log(id);
-        return await executeQuery(`
-           SELECT  
-            cliente.nome_completo as Nome, 
-            atividade.nome as Atividade, 
-            terapeuta.nome as Terapeuta, 
-            demanda.id as DemandaID
-            FROM demanda
+     buscarTodasDemandasID: async (id) => {
+
+        const [rows] = await executeQuery(`
+          SELECT  
+            demanda.id as DemandaID,
+            demanda.cliente_id,
+            cliente.nome_completo as Nome,
+            demanda.atividade_id,
+            atividade.nome as Atividade,
+            demanda.terapeuta_id,
+            terapeuta.nome as Terapeuta
+        FROM demanda
             JOIN cliente ON cliente.id = demanda.cliente_id
                 JOIN atividade ON atividade.id = demanda.atividade_id
                     JOIN terapeuta ON terapeuta.id = demanda.terapeuta_id
-            WHERE cliente.id = ?
+        WHERE demanda.id = ?
         `, [id]);
+
+        return rows;
     },
 
     //buscar todos nomes de clientes
@@ -138,11 +144,17 @@ const Contrato = {
 
 
     listarPorID: async (id) => {
+
+        console.log("id", id);
+        
         try {
             const result = await executeQuery(
                 "SELECT * FROM demanda WHERE id=?",
                 [id]
             );
+
+            console.log(result);
+
             return result;
         } catch (error) {
             throw error;

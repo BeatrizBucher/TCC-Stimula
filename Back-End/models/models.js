@@ -5,22 +5,6 @@ require('dotenv').config();
 
 const Usuarios = {
 
-    // cadastrar e login
-    registrarUsuarios: async (nome, sobrenome, regra, email, senha) => {
-
-        try {
-
-            const password = await bcrypt.hash(senha, 10);
-            return await executeQuery(
-                'INSERT INTO usuarios (nome, sobrenome, regra, email, senha) VALUES (?,?,?,?,?)',
-                [nome, sobrenome, regra, email, password]
-            );
-        }
-        catch (error) {
-            throw error;
-        }
-    },
-
     login: async (email, senha) => {
         try {
             const consulta = await Usuarios.getEmail(email);

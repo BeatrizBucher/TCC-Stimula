@@ -1,60 +1,52 @@
-import './paginas/Demandas/Demandas.css'
-import { useParams, useState, useEffect, useContext } from "react";
+import './paginas/Demandas/Demandas.css';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { AuthContext } from "./Context/AuthContext";
 
 function MainEditarDemanda() {
+
+    const { id } = useParams();
+
+    console.log(id);
 
     const [idpaciente, setIdPaciente] = useState('');
     const [idatividade, setIdAtividade] = useState('');
     const [idterapeuta, setIdTerapeuta] = useState('');
+
     const [pacientes, setPaciente] = useState([]);
     const [atividades, setAtividade] = useState([]);
     const [terapeutas, setTerapeuta] = useState([]);
+
     const [carregando, setCarregando] = useState(true);
 
     useEffect(() => {
         buscarDados();
-    }, []);
+    }, [id]);
 
     async function buscarDados() {
         try {
-            const id = localStorage.getItem('id');
-
-            const demandaRes = await axios.get(`http://localhost:3001/api/demanda/${id}`, {
-
-            });
+            const demandaRes = await axios.get(`http://localhost:3001/demanda/${id}`);
 
             const [pacienteRes, atividadeRes, terapeutaRes] = await Promise.all([
-                axios.get('http://localhost:3001/listarNomeCliente', {
-
-                }),
-                axios.get('http://localhost:3001/listarAtividades', {
-
-                }),
-                axios.get('http://localhost:3001/listarTerapeutas', {
-
-                })
+                axios.get('http://localhost:3001/listarNomeCliente'),
+                axios.get('http://localhost:3001/listarAtividades'),
+                axios.get('http://localhost:3001/listarTerapeutas')
             ]);
 
             if (demandaRes.status === 200) {
                 const demanda = demandaRes.data;
-                setIdPaciente(demanda.idpaciente || '');
-                setIdAtividade(demanda.idatividade || '');
-                setIdTerapeuta(demanda.idterapeuta || '');
+
+                setIdPaciente(demanda.cliente_id || demanda.idpaciente || '');
+                setIdAtividade(demanda.atividade_id || demanda.idatividade || '');
+                setIdTerapeuta(demanda.terapeuta_id || demanda.idterapeuta || '');
             }
 
-            if (pacienteRes.status === 200) {
-                setPaciente(pacienteRes.data);
-            }
-            if (atividadeRes.status === 200) {
-                setAtividade(atividadeRes.data);
-            }
-            if (terapeutaRes.status === 200) {
-                setTerapeuta(terapeutaRes.data);
-            }
+            if (pacienteRes.status === 200) setPaciente(pacienteRes.data);
+            if (atividadeRes.status === 200) setAtividade(atividadeRes.data);
+            if (terapeutaRes.status === 200) setTerapeuta(terapeutaRes.data);
 
             setCarregando(false);
+
         } catch (error) {
             console.error('Erro ao buscar dados:', error);
             alert('Erro ao carregar dados da demanda');
@@ -62,28 +54,33 @@ function MainEditarDemanda() {
         }
     }
 
-
-    async function editarDemanda(event,id) {
+    async function editarDemanda(event) {
         event.preventDefault();
 
-        const cliente = {
-            idpaciente,
-            idatividade,
-            idterapeuta,
+        if (!idpaciente || !idatividade || !idterapeuta) {
+            alert('Por favor, preencha todos os campos');
+            return;
+        }
+
+        const demandaAtualizada = {
+            cliente_id: idpaciente,
+            atividade_id: idatividade,
+            terapeuta_id: idterapeuta
         };
 
-        try {
-            const cadastro = await axios.put(`http://localhost:3001/api/atualizarCliente/${id}`, cliente, {
-                // headers: {
-                //     'Authorization': `Bearer ${token}`
-                // },
-            });
 
-            if (cadastro.status === 200) {
-                alert('Cliente atualizado com sucesso!');
+        try {
+            const resposta = await axios.put(
+                `http://localhost:3001/atualizarDemanda/${id}`,
+                demandaAtualizada
+            );
+
+            if (resposta.status === 200) {
+                alert('Demanda atualizada com sucesso.');
             }
         } catch (erro) {
-            alert(`Erro ao atualizar cliente: ${erro.message}`);
+            console.error('Erro completo:', erro.response || erro);
+            alert(`Erro ao atualizar demanda: ${erro.response?.data?.msg || erro.message}`);
         }
     }
 
@@ -98,13 +95,16 @@ function MainEditarDemanda() {
                     <h2 className="titulo-principal">Editar demanda</h2>
                     <div className="caixa-cadastro mx-auto">
                         <form onSubmit={editarDemanda}>
+
                             <div className="mb-3">
                                 <label className="form-label texto-label">Paciente:</label>
                                 <select
                                     className="form-select campo-input"
                                     value={idpaciente}
                                     onChange={(e) => setIdPaciente(e.target.value)}
+                                    required
                                 >
+                                    <option value="">Selecione um paciente</option>
                                     {pacientes.length === 0 ? (
                                         <option disabled>Sem pacientes</option>
                                     ) : (
@@ -123,7 +123,9 @@ function MainEditarDemanda() {
                                     className="form-select campo-input"
                                     value={idatividade}
                                     onChange={(e) => setIdAtividade(e.target.value)}
+                                    required
                                 >
+                                    <option value="">Selecione uma atividade</option>
                                     {atividades.length === 0 ? (
                                         <option disabled>Sem atividades</option>
                                     ) : (
@@ -142,7 +144,9 @@ function MainEditarDemanda() {
                                     className="form-select campo-input"
                                     value={idterapeuta}
                                     onChange={(e) => setIdTerapeuta(e.target.value)}
+                                    required
                                 >
+                                    <option value="">Selecione um terapeuta</option>
                                     {terapeutas.length === 0 ? (
                                         <option disabled>Sem terapeutas</option>
                                     ) : (
@@ -160,6 +164,7 @@ function MainEditarDemanda() {
                                     Editar
                                 </button>
                             </div>
+
                         </form>
                     </div>
                 </div>
